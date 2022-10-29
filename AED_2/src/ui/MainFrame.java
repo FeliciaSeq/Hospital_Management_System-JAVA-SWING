@@ -30,138 +30,127 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MainPanel = new javax.swing.JSplitPane();
-        LoginPanel = new javax.swing.JPanel();
-        LoginLabel = new javax.swing.JLabel();
-        PatientLoginbtn = new javax.swing.JButton();
-        DoctorLoginbtn = new javax.swing.JButton();
-        HospitalAdminLoginbtn = new javax.swing.JButton();
-        CommunityAdminLoginbtn = new javax.swing.JButton();
-        SystemAdminLoginbtn = new javax.swing.JButton();
-        HomePanel = new javax.swing.JPanel();
+        MainPnl = new javax.swing.JPanel();
+        LoginLbl = new javax.swing.JLabel();
+        CommAdmLoginBtn = new javax.swing.JButton();
+        SystemAdmLoginBtn = new javax.swing.JButton();
+        HospitalAdmLoginBtn = new javax.swing.JButton();
+        PatientLoginBtn = new javax.swing.JButton();
+        DoctorLoginBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        LoginLabel.setText("Login As:");
+        LoginLbl.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        LoginLbl.setText("Login As");
 
-        PatientLoginbtn.setText("Patient");
-        PatientLoginbtn.addActionListener(new java.awt.event.ActionListener() {
+        CommAdmLoginBtn.setText("Community Admin");
+        CommAdmLoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PatientLoginbtnActionPerformed(evt);
+                CommAdmLoginBtnActionPerformed(evt);
             }
         });
 
-        DoctorLoginbtn.setText("Doctor");
-        DoctorLoginbtn.addActionListener(new java.awt.event.ActionListener() {
+        SystemAdmLoginBtn.setText("System Admin");
+        SystemAdmLoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DoctorLoginbtnActionPerformed(evt);
+                SystemAdmLoginBtnActionPerformed(evt);
             }
         });
 
-        HospitalAdminLoginbtn.setText("Hospital Admin");
-        HospitalAdminLoginbtn.addActionListener(new java.awt.event.ActionListener() {
+        HospitalAdmLoginBtn.setText("Hospital Admin");
+        HospitalAdmLoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HospitalAdminLoginbtnActionPerformed(evt);
+                HospitalAdmLoginBtnActionPerformed(evt);
             }
         });
 
-        CommunityAdminLoginbtn.setText("Community Admin");
-        CommunityAdminLoginbtn.setPreferredSize(new java.awt.Dimension(145, 23));
-        CommunityAdminLoginbtn.addActionListener(new java.awt.event.ActionListener() {
+        PatientLoginBtn.setText("Patient");
+        PatientLoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CommunityAdminLoginbtnActionPerformed(evt);
+                PatientLoginBtnActionPerformed(evt);
             }
         });
 
-        SystemAdminLoginbtn.setText("System Admin");
-        SystemAdminLoginbtn.setSize(new java.awt.Dimension(145, 23));
-        SystemAdminLoginbtn.addActionListener(new java.awt.event.ActionListener() {
+        DoctorLoginBtn.setText("Doctor");
+        DoctorLoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SystemAdminLoginbtnActionPerformed(evt);
+                DoctorLoginBtnActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout LoginPanelLayout = new javax.swing.GroupLayout(LoginPanel);
-        LoginPanel.setLayout(LoginPanelLayout);
-        LoginPanelLayout.setHorizontalGroup(
-            LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LoginPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout MainPnlLayout = new javax.swing.GroupLayout(MainPnl);
+        MainPnl.setLayout(MainPnlLayout);
+        MainPnlLayout.setHorizontalGroup(
+            MainPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPnlLayout.createSequentialGroup()
+                .addGroup(MainPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MainPnlLayout.createSequentialGroup()
+                        .addGap(308, 308, 308)
+                        .addComponent(LoginLbl))
+                    .addGroup(MainPnlLayout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(CommAdmLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88)
+                        .addComponent(SystemAdmLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(96, 96, 96)
+                        .addComponent(HospitalAdmLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(MainPnlLayout.createSequentialGroup()
+                        .addGap(208, 208, 208)
+                        .addComponent(PatientLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122)
+                        .addComponent(DoctorLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(114, Short.MAX_VALUE))
+        );
+        MainPnlLayout.setVerticalGroup(
+            MainPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPnlLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(LoginLbl)
                 .addGap(61, 61, 61)
-                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(DoctorLoginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(HospitalAdminLoginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PatientLoginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LoginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CommunityAdminLoginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SystemAdminLoginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGroup(MainPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CommAdmLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SystemAdmLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HospitalAdmLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(90, 90, 90)
+                .addGroup(MainPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PatientLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DoctorLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
-        LoginPanelLayout.setVerticalGroup(
-            LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LoginPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(LoginLabel)
-                .addGap(50, 50, 50)
-                .addComponent(PatientLoginbtn)
-                .addGap(50, 50, 50)
-                .addComponent(DoctorLoginbtn)
-                .addGap(50, 50, 50)
-                .addComponent(HospitalAdminLoginbtn)
-                .addGap(50, 50, 50)
-                .addComponent(CommunityAdminLoginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(SystemAdminLoginbtn)
-                .addContainerGap(256, Short.MAX_VALUE))
-        );
-
-        MainPanel.setLeftComponent(LoginPanel);
-
-        javax.swing.GroupLayout HomePanelLayout = new javax.swing.GroupLayout(HomePanel);
-        HomePanel.setLayout(HomePanelLayout);
-        HomePanelLayout.setHorizontalGroup(
-            HomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 993, Short.MAX_VALUE)
-        );
-        HomePanelLayout.setVerticalGroup(
-            HomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
-        );
-
-        MainPanel.setRightComponent(HomePanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainPanel, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(MainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainPanel)
+            .addComponent(MainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PatientLoginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientLoginbtnActionPerformed
+    private void CommAdmLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommAdmLoginBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PatientLoginbtnActionPerformed
+    }//GEN-LAST:event_CommAdmLoginBtnActionPerformed
 
-    private void DoctorLoginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorLoginbtnActionPerformed
+    private void SystemAdmLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SystemAdmLoginBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_DoctorLoginbtnActionPerformed
+    }//GEN-LAST:event_SystemAdmLoginBtnActionPerformed
 
-    private void HospitalAdminLoginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalAdminLoginbtnActionPerformed
+    private void HospitalAdmLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalAdmLoginBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_HospitalAdminLoginbtnActionPerformed
+    }//GEN-LAST:event_HospitalAdmLoginBtnActionPerformed
 
-    private void CommunityAdminLoginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommunityAdminLoginbtnActionPerformed
+    private void PatientLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientLoginBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CommunityAdminLoginbtnActionPerformed
+    }//GEN-LAST:event_PatientLoginBtnActionPerformed
 
-    private void SystemAdminLoginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SystemAdminLoginbtnActionPerformed
+    private void DoctorLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorLoginBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_SystemAdminLoginbtnActionPerformed
+    }//GEN-LAST:event_DoctorLoginBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,14 +188,12 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CommunityAdminLoginbtn;
-    private javax.swing.JButton DoctorLoginbtn;
-    private javax.swing.JPanel HomePanel;
-    private javax.swing.JButton HospitalAdminLoginbtn;
-    private javax.swing.JLabel LoginLabel;
-    private javax.swing.JPanel LoginPanel;
-    private javax.swing.JSplitPane MainPanel;
-    private javax.swing.JButton PatientLoginbtn;
-    private javax.swing.JButton SystemAdminLoginbtn;
+    private javax.swing.JButton CommAdmLoginBtn;
+    private javax.swing.JButton DoctorLoginBtn;
+    private javax.swing.JButton HospitalAdmLoginBtn;
+    private javax.swing.JLabel LoginLbl;
+    private javax.swing.JPanel MainPnl;
+    private javax.swing.JButton PatientLoginBtn;
+    private javax.swing.JButton SystemAdmLoginBtn;
     // End of variables declaration//GEN-END:variables
 }
