@@ -5,6 +5,10 @@
 package ui;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Community;
+import model.CommunityHistory;
 
 /**
  *
@@ -15,9 +19,16 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
     /**
      * Creates new form SystemAdmPOVcommunity
      */
-    public SystemAdmPOVcommunity() {
+    
+    CommunityHistory CommHistory;
+    
+    
+    public SystemAdmPOVcommunity(CommunityHistory CommHistory) {
         initComponents();
+        this.CommHistory = CommHistory;
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        populateTable();
+        
     }
 
     /**
@@ -71,6 +82,11 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
         SaStateCommLbl1.setText("State:");
 
         SaAddCommBtn.setText("Add");
+        SaAddCommBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaAddCommBtnActionPerformed(evt);
+            }
+        });
 
         SaAddCommDeetsLbl.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         SaAddCommDeetsLbl.setText("Add Community Details");
@@ -170,6 +186,11 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
                 "City", "Pin Code", "Area", "State"
             }
         ));
+        CommDeetsTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CommDeetsTblMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(CommDeetsTbl);
 
         SaSearchCommDeetsLbl.setText("Search Community Details:");
@@ -263,7 +284,7 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SystemAdmPOVSplitComm, javax.swing.GroupLayout.PREFERRED_SIZE, 839, Short.MAX_VALUE)
+            .addComponent(SystemAdmPOVSplitComm, javax.swing.GroupLayout.DEFAULT_SIZE, 986, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,6 +296,42 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
 
     private void SaUpdateCommBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaUpdateCommBtnActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model =(DefaultTableModel) CommDeetsTbl.getModel();
+      if(CommDeetsTbl.getSelectedRowCount()==1){
+         
+     
+        String City = SaCityCommTxt2.getText();
+        String PinCode = SaPinCommTxt2.getText();
+        String Area = SaAreaCommTxt2.getText();
+        String State= SaStateCommTxt2.getText();
+        
+        
+        
+       
+        model.setValueAt(City,CommDeetsTbl.getSelectedRow(),0);
+        model.setValueAt(PinCode,CommDeetsTbl.getSelectedRow(),1);
+        model.setValueAt(Area,CommDeetsTbl.getSelectedRow(),2);
+        model.setValueAt(State,CommDeetsTbl.getSelectedRow(),3);
+        
+        
+        for(Community cm : CommHistory.getCommHistory()){
+          
+            if(String.valueOf(cm.getPinCode()).equals(PinCode)){
+                cm.setCity(City);
+                
+                cm.setArea(Area);
+                cm.setState(State);
+                
+                
+            
+            }
+        }
+        
+       
+       
+        JOptionPane.showMessageDialog(this,"Community Details Updated Successfully.");
+        
+      }
     }//GEN-LAST:event_SaUpdateCommBtnActionPerformed
 
     private void SaSearchCommDeetsTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaSearchCommDeetsTxtActionPerformed
@@ -283,42 +340,72 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
 
     private void SaDeleteCommBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaDeleteCommBtnActionPerformed
         // TODO add your handling code here:
+        int selectedRowIndex = CommDeetsTbl.getSelectedRow();
+         if (selectedRowIndex<0){
+             
+             JOptionPane.showMessageDialog(this,"Select a row to delete.");
+             return;
+         
+         }
+         
+         DefaultTableModel model = (DefaultTableModel) CommDeetsTbl.getModel();
+         Community selectedCommunity = (Community) model.getValueAt(selectedRowIndex, 0); 
+         
+         CommHistory.deleteCommunity(selectedCommunity);
+             
+             JOptionPane.showMessageDialog(this,"Community deleted.");
+             populateTable();
     }//GEN-LAST:event_SaDeleteCommBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SystemAdmPOVcommunity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SystemAdmPOVcommunity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SystemAdmPOVcommunity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SystemAdmPOVcommunity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void SaAddCommBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaAddCommBtnActionPerformed
+        // TODO add your handling code here:
+        String City = SaCityCommTxt1.getText();
+        
+  
+        long PinCode = Long.parseLong(SaPinCommTxt1.getText());
+        
+        
+        
+        String Area = SaAreaCommTxt1.getText();
+        
+        String State = SaStateCommTxt1.getText();
+        
+        Community cm = CommHistory.addNewCommunity();
+        
+        cm.setCity(City);
+        cm.setPinCode(PinCode);
+        cm.setArea(Area);
+        cm.setState(State);
+        
+        
+        JOptionPane.showMessageDialog(this,"Community Added");
+        populateTable();
+        SaCityCommTxt1.setText("");
+        SaPinCommTxt1.setText("");
+        SaAreaCommTxt1.setText("");
+        SaStateCommTxt1.setText("");
+        
+    }//GEN-LAST:event_SaAddCommBtnActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SystemAdmPOVcommunity().setVisible(true);
-            }
-        });
-    }
+    private void CommDeetsTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CommDeetsTblMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model =(DefaultTableModel) CommDeetsTbl.getModel();
+
+
+            String City = model.getValueAt(CommDeetsTbl.getSelectedRow(),0).toString();
+            String PinCode = model.getValueAt(CommDeetsTbl.getSelectedRow(),1).toString();
+            String Area = model.getValueAt(CommDeetsTbl.getSelectedRow(),2).toString();
+            String State = model.getValueAt(CommDeetsTbl.getSelectedRow(),3).toString();
+            
+            
+
+            SaCityCommTxt2.setText(City);
+        SaPinCommTxt2.setText(PinCode);
+        SaAreaCommTxt2.setText(Area);
+        SaStateCommTxt2.setText(State);        
+    }//GEN-LAST:event_CommDeetsTblMouseClicked
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable CommDeetsTbl;
@@ -350,4 +437,26 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
     private javax.swing.JSplitPane SystemAdmPOVSplitComm;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        DefaultTableModel model = (DefaultTableModel) CommDeetsTbl.getModel();
+        model.setRowCount(0);
+        
+        for(Community cm : CommHistory .getCommHistory()){
+            
+            Object [] row = new Object[4];
+            row[0] = cm;
+            row[1] = cm.getPinCode();
+            row[2] = cm.getArea();
+            row[3] = cm.getState();
+            
+            
+            
+            model.addRow(row);
+    }
+
+    
+}
 }

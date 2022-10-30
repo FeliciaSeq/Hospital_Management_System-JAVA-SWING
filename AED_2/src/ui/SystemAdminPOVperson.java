@@ -5,6 +5,10 @@
 package ui;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Person;
+import model.PersonHistory;
 
 /**
  *
@@ -15,9 +19,17 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
     /**
      * Creates new form SystemAdminPOVperson
      */
-    public SystemAdminPOVperson() {
+    
+    
+    PersonHistory History;
+    
+    
+    public SystemAdminPOVperson(PersonHistory History) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.History = History;
+        
+        populateTable();
     }
 
     /**
@@ -35,16 +47,14 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
         IdPeLbl1 = new javax.swing.JLabel();
         AgePeLbl1 = new javax.swing.JLabel();
         GenderPeLbl1 = new javax.swing.JLabel();
-        AddressPeLbl1 = new javax.swing.JLabel();
         IsPatientPeLbl1 = new javax.swing.JLabel();
         SubmitPeBtn = new javax.swing.JButton();
         NamePeTxt1 = new javax.swing.JTextField();
         IdPeTxt1 = new javax.swing.JTextField();
         AgePeTxt1 = new javax.swing.JTextField();
         GenderPeTxt1 = new javax.swing.JTextField();
-        AddressPeTxt1 = new javax.swing.JTextField();
-        YesCb1 = new javax.swing.JCheckBox();
         EnterPersonDeetLbl = new javax.swing.JLabel();
+        IsPatientPeTxt1 = new javax.swing.JTextField();
         UpdateSApnl = new javax.swing.JPanel();
         NamePeLbl2 = new javax.swing.JLabel();
         NamePeTxt2 = new javax.swing.JTextField();
@@ -54,17 +64,15 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
         AgePeTxt2 = new javax.swing.JTextField();
         GenderPeLbl2 = new javax.swing.JLabel();
         GenderPeTxt2 = new javax.swing.JTextField();
-        AddressPeLbl2 = new javax.swing.JLabel();
-        AddressPeTxt2 = new javax.swing.JTextField();
         IsPatientPeLbl2 = new javax.swing.JLabel();
-        YesCb2 = new javax.swing.JCheckBox();
         EditPersonDeetLbl = new javax.swing.JLabel();
-        SearchPeTbl = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        SearchPeScroll = new javax.swing.JScrollPane();
+        SearchPeTbl = new javax.swing.JTable();
         SearchDeetsPe = new javax.swing.JLabel();
         SearchDeetsPeTxt = new javax.swing.JTextField();
         UpdatePeBtn = new javax.swing.JButton();
         DeletePeBtn = new javax.swing.JButton();
+        IsPatientPeTxt2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,22 +86,18 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
 
         GenderPeLbl1.setText("Gender:");
 
-        AddressPeLbl1.setText("Address:");
-
         IsPatientPeLbl1.setText("Is Person Patient?");
 
         SubmitPeBtn.setText("Submit");
+        SubmitPeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubmitPeBtnActionPerformed(evt);
+            }
+        });
 
         AgePeTxt1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgePeTxt1ActionPerformed(evt);
-            }
-        });
-
-        YesCb1.setText("Yes!");
-        YesCb1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                YesCb1ActionPerformed(evt);
             }
         });
 
@@ -107,35 +111,36 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
             .addGroup(SubmitSApnlLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SubmitSApnlLayout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(SubmitPeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(EnterPersonDeetLbl)
-                        .addGroup(SubmitSApnlLayout.createSequentialGroup()
-                            .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(IsPatientPeLbl1)
-                                .addComponent(AddressPeLbl1)
-                                .addComponent(GenderPeLbl1)
-                                .addComponent(AgePeLbl1)
-                                .addComponent(IdPeLbl1)
-                                .addComponent(NamePeLbl1))
-                            .addGap(69, 69, 69)
-                            .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(YesCb1)
-                                .addComponent(NamePeTxt1)
-                                .addComponent(IdPeTxt1)
-                                .addComponent(AgePeTxt1)
-                                .addComponent(GenderPeTxt1)
-                                .addComponent(AddressPeTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(EnterPersonDeetLbl, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SubmitSApnlLayout.createSequentialGroup()
+                        .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(IsPatientPeLbl1)
+                            .addComponent(GenderPeLbl1)
+                            .addComponent(AgePeLbl1)
+                            .addComponent(IdPeLbl1)
+                            .addComponent(NamePeLbl1))
+                        .addGap(69, 69, 69)
+                        .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SubmitSApnlLayout.createSequentialGroup()
+                                .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(AgePeTxt1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(NamePeTxt1)
+                                    .addComponent(IdPeTxt1)
+                                    .addComponent(GenderPeTxt1))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(IsPatientPeTxt1))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SubmitSApnlLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SubmitPeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
         );
         SubmitSApnlLayout.setVerticalGroup(
             SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SubmitSApnlLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(EnterPersonDeetLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NamePeLbl1)
                     .addComponent(NamePeTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,22 +151,18 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AgePeLbl1)
-                    .addComponent(AgePeTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(AgePeTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GenderPeLbl1)
                     .addComponent(GenderPeTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AddressPeLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AddressPeTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(36, 36, 36)
                 .addGroup(SubmitSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IsPatientPeLbl1)
-                    .addComponent(YesCb1))
-                .addGap(61, 61, 61)
+                    .addComponent(IsPatientPeTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(69, 69, 69)
                 .addComponent(SubmitPeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
+                .addGap(127, 127, 127))
         );
 
         SystemAdminPOVSplitPerson.setLeftComponent(SubmitSApnl);
@@ -180,63 +181,74 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
 
         GenderPeLbl2.setText("Gender:");
 
-        AddressPeLbl2.setText("Address:");
-
         IsPatientPeLbl2.setText("Is Person Patient?");
-
-        YesCb2.setText("Yes!");
-        YesCb2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                YesCb2ActionPerformed(evt);
-            }
-        });
 
         EditPersonDeetLbl.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         EditPersonDeetLbl.setText("Edit Person's Details");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        SearchPeTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Name", "ID", "Age", "Gender", "Address", "Is Patient?"
+                "Name", "ID", "Age", "Gender", "Is Patient?"
             }
         ));
-        SearchPeTbl.setViewportView(jTable1);
+        SearchPeTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchPeTblMouseClicked(evt);
+            }
+        });
+        SearchPeScroll.setViewportView(SearchPeTbl);
 
         SearchDeetsPe.setText("Search Details:");
 
         UpdatePeBtn.setText("Update");
+        UpdatePeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdatePeBtnActionPerformed(evt);
+            }
+        });
 
         DeletePeBtn.setText("Delete");
+        DeletePeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeletePeBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout UpdateSApnlLayout = new javax.swing.GroupLayout(UpdateSApnl);
         UpdateSApnl.setLayout(UpdateSApnlLayout);
         UpdateSApnlLayout.setHorizontalGroup(
             UpdateSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateSApnlLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(UpdatePeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97)
+                .addComponent(DeletePeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(177, 177, 177))
             .addGroup(UpdateSApnlLayout.createSequentialGroup()
                 .addGroup(UpdateSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(UpdateSApnlLayout.createSequentialGroup()
                         .addGap(217, 217, 217)
                         .addComponent(EditPersonDeetLbl))
                     .addGroup(UpdateSApnlLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(SearchPeScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(UpdateSApnlLayout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addComponent(SearchDeetsPe)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SearchDeetsPeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(UpdateSApnlLayout.createSequentialGroup()
                         .addGroup(UpdateSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateSApnlLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(GenderPeLbl2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(GenderPeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(AddressPeLbl2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(AddressPeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(UpdateSApnlLayout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addComponent(NamePeLbl2)
@@ -244,33 +256,26 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
                                 .addComponent(NamePeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(49, 49, 49)
                                 .addComponent(IdPeLbl2)
-                                .addGap(18, 18, 18)
-                                .addComponent(IdPeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(42, 42, 42)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateSApnlLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(GenderPeLbl2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(GenderPeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(78, 78, 78)))
+                        .addGroup(UpdateSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(IsPatientPeLbl2)
+                            .addComponent(IdPeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(UpdateSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(UpdateSApnlLayout.createSequentialGroup()
+                                .addGap(42, 42, 42)
                                 .addComponent(AgePeLbl2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(AgePeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(UpdateSApnlLayout.createSequentialGroup()
-                                .addComponent(IsPatientPeLbl2)
                                 .addGap(18, 18, 18)
-                                .addComponent(YesCb2))))
-                    .addGroup(UpdateSApnlLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(SearchPeTbl, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(UpdateSApnlLayout.createSequentialGroup()
-                        .addGap(225, 225, 225)
-                        .addComponent(SearchDeetsPe)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SearchDeetsPeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateSApnlLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(UpdatePeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97)
-                .addComponent(DeletePeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(177, 177, 177))
+                                .addComponent(IsPatientPeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         UpdateSApnlLayout.setVerticalGroup(
             UpdateSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,12 +294,10 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
                 .addGroup(UpdateSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GenderPeLbl2)
                     .addComponent(GenderPeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddressPeLbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AddressPeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(IsPatientPeLbl2)
-                    .addComponent(YesCb2))
+                    .addComponent(IsPatientPeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
-                .addComponent(SearchPeTbl, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SearchPeScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(UpdateSApnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchDeetsPeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,21 +315,17 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SystemAdminPOVSplitPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 980, Short.MAX_VALUE)
+            .addComponent(SystemAdminPOVSplitPerson)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(SystemAdminPOVSplitPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void YesCb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesCb1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_YesCb1ActionPerformed
 
     private void AgePeTxt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgePeTxt1ActionPerformed
         // TODO add your handling code here:
@@ -336,50 +335,125 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_AgePeTxt2ActionPerformed
 
-    private void YesCb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesCb2ActionPerformed
+    private void SubmitPeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitPeBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_YesCb2ActionPerformed
+        String Name = NamePeTxt1.getText();
+        
+  
+        long ID = Long.parseLong(IdPeTxt1.getText());
+        
+        int Age = Integer.parseInt(AgePeTxt1.getText());
+        
+        String Gender = GenderPeTxt1.getText();
+        
+        String IsPatient = IsPatientPeTxt1.getText();
+        
+        Person pe = History.addNewPerson();
+        
+        pe.setName(Name);
+        pe.setID(ID);
+        pe.setAge(Age);
+        pe.setGender(Gender);
+        pe.setIsPatient(IsPatient);
+        
+        JOptionPane.showMessageDialog(this,"Person Added");
+        populateTable();
+        NamePeTxt1.setText("");
+        IdPeTxt1.setText("");
+        AgePeTxt1.setText("");
+        GenderPeTxt1.setText("");
+        IsPatientPeTxt1.setText("");
+        
+        
+    }//GEN-LAST:event_SubmitPeBtnActionPerformed
+
+    private void DeletePeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletePeBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = SearchPeTbl.getSelectedRow();
+         if (selectedRowIndex<0){
+             
+             JOptionPane.showMessageDialog(this,"Select a row to delete.");
+             return;
+         
+         }
+         
+         DefaultTableModel model = (DefaultTableModel) SearchPeTbl.getModel();
+         Person selectedPerson = (Person) model.getValueAt(selectedRowIndex, 0); 
+         
+         History.deletePerson(selectedPerson);
+             
+             JOptionPane.showMessageDialog(this,"Person deleted.");
+             populateTable();
+         
+         
+    }//GEN-LAST:event_DeletePeBtnActionPerformed
+
+    private void UpdatePeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatePeBtnActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model =(DefaultTableModel) SearchPeTbl.getModel();
+      if(SearchPeTbl.getSelectedRowCount()==1){
+         
+     
+        String Name = NamePeTxt2.getText();
+        String ID = IdPeTxt2.getText();
+        String Age = AgePeTxt2.getText();
+        String Gender= GenderPeTxt2.getText();
+        String IsPatient = IsPatientPeTxt2.getText();
+        
+        
+       
+        model.setValueAt(Name,SearchPeTbl.getSelectedRow(),0);
+        model.setValueAt(ID,SearchPeTbl.getSelectedRow(),1);
+        model.setValueAt(Age,SearchPeTbl.getSelectedRow(),2);
+        model.setValueAt(Gender,SearchPeTbl.getSelectedRow(),3);
+        model.setValueAt(IsPatient,SearchPeTbl.getSelectedRow(),4);
+        
+        for(Person pe : History.getHistory()){
+          
+            if(String.valueOf(pe.getID()).equals(ID)){
+                pe.setName(Name);
+                pe.setAge(ABORT);
+                pe.setGender(Gender);
+                pe.setIsPatient(IsPatient);
+                
+                
+            
+            }
+        }
+        
+       
+       
+        JOptionPane.showMessageDialog(this,"Person Details Updated Successfully.");
+        
+      }
+    }//GEN-LAST:event_UpdatePeBtnActionPerformed
+
+    private void SearchPeTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchPeTblMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model =(DefaultTableModel) SearchPeTbl.getModel();
+
+
+            String Name = model.getValueAt(SearchPeTbl.getSelectedRow(),0).toString();
+            String ID = model.getValueAt(SearchPeTbl.getSelectedRow(),1).toString();
+            String Age= model.getValueAt(SearchPeTbl.getSelectedRow(),2).toString();
+            String Gender = model.getValueAt(SearchPeTbl.getSelectedRow(),3).toString();
+            String IsPatient = model.getValueAt(SearchPeTbl.getSelectedRow(),4).toString();
+            
+
+            NamePeTxt2.setText(Name);
+            IdPeTxt2.setText(ID);
+            AgePeTxt2.setText(Age);
+            GenderPeTxt2.setText(Gender);
+            IsPatientPeTxt2.setText(IsPatient);
+        
+    }//GEN-LAST:event_SearchPeTblMouseClicked
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminPOVperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminPOVperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminPOVperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminPOVperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SystemAdminPOVperson().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AddressPeLbl1;
-    private javax.swing.JLabel AddressPeLbl2;
-    private javax.swing.JTextField AddressPeTxt1;
-    private javax.swing.JTextField AddressPeTxt2;
     private javax.swing.JLabel AgePeLbl1;
     private javax.swing.JLabel AgePeLbl2;
     private javax.swing.JTextField AgePeTxt1;
@@ -397,20 +471,40 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
     private javax.swing.JTextField IdPeTxt2;
     private javax.swing.JLabel IsPatientPeLbl1;
     private javax.swing.JLabel IsPatientPeLbl2;
+    private javax.swing.JTextField IsPatientPeTxt1;
+    private javax.swing.JTextField IsPatientPeTxt2;
     private javax.swing.JLabel NamePeLbl1;
     private javax.swing.JLabel NamePeLbl2;
     private javax.swing.JTextField NamePeTxt1;
     private javax.swing.JTextField NamePeTxt2;
     private javax.swing.JLabel SearchDeetsPe;
     private javax.swing.JTextField SearchDeetsPeTxt;
-    private javax.swing.JScrollPane SearchPeTbl;
+    private javax.swing.JScrollPane SearchPeScroll;
+    private javax.swing.JTable SearchPeTbl;
     private javax.swing.JButton SubmitPeBtn;
     private javax.swing.JPanel SubmitSApnl;
     private javax.swing.JSplitPane SystemAdminPOVSplitPerson;
     private javax.swing.JButton UpdatePeBtn;
     private javax.swing.JPanel UpdateSApnl;
-    private javax.swing.JCheckBox YesCb1;
-    private javax.swing.JCheckBox YesCb2;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        DefaultTableModel model = (DefaultTableModel) SearchPeTbl.getModel();
+        model.setRowCount(0);
+        
+        for(Person pe : History .getHistory()){
+            
+            Object [] row = new Object[5];
+            row[0] = pe;
+            row[1] = pe.getID();
+            row[2] = pe.getAge();
+            row[3] = pe.getGender();
+            row[4] = pe.getIsPatient();
+            
+            
+            model.addRow(row);
+    }
+}
 }

@@ -40,6 +40,11 @@ public class SystemAdmLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LoginBtnS.setText("Login");
+        LoginBtnS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginBtnSActionPerformed(evt);
+            }
+        });
 
         SloginLbl.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         SloginLbl.setText("System Admin's Login");
@@ -109,6 +114,12 @@ public class SystemAdmLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void LoginBtnSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnSActionPerformed
+        // TODO add your handling code here:
+        SystemAdminPOVmain admin = new SystemAdminPOVmain ();
+        admin.show();
+    }//GEN-LAST:event_LoginBtnSActionPerformed
 
     /**
      * @param args the command line arguments

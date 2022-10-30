@@ -5,6 +5,8 @@
 package ui;
 
 import javax.swing.JFrame;
+import model.CommunityHistory;
+import model.PersonHistory;
 
 /**
  *
@@ -15,9 +17,17 @@ public class SystemAdminPOVmain extends javax.swing.JFrame {
     /**
      * Creates new form SystemAdminPOVmain
      */
+    
+    PersonHistory History;
+    CommunityHistory CommHistory;
+    
+    
     public SystemAdminPOVmain() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        History = new PersonHistory();
+        CommHistory = new CommunityHistory();
     }
 
     /**
@@ -45,6 +55,11 @@ public class SystemAdminPOVmain extends javax.swing.JFrame {
         SaNavlbl.setText("Where would you like to go at?");
 
         SaPersonlbl.setText("Person");
+        SaPersonlbl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaPersonlblActionPerformed(evt);
+            }
+        });
 
         SaHospitallbl.setText("Hospital");
         SaHospitallbl.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +69,11 @@ public class SystemAdminPOVmain extends javax.swing.JFrame {
         });
 
         SaCommunitylbl.setText("Community");
+        SaCommunitylbl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaCommunitylblActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout SaFirstPnlLayout = new javax.swing.GroupLayout(SaFirstPnl);
         SaFirstPnl.setLayout(SaFirstPnlLayout);
@@ -109,40 +129,23 @@ public class SystemAdminPOVmain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SaHospitallblActionPerformed
 
+    private void SaPersonlblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaPersonlblActionPerformed
+        // TODO add your handling code here:
+        SystemAdminPOVperson admin = new SystemAdminPOVperson (History);
+        admin.show();
+    }//GEN-LAST:event_SaPersonlblActionPerformed
+
+    private void SaCommunitylblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaCommunitylblActionPerformed
+        // TODO add your handling code here:
+        
+        SystemAdmPOVcommunity admin = new SystemAdmPOVcommunity (CommHistory);
+        admin.show();
+    }//GEN-LAST:event_SaCommunitylblActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminPOVmain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminPOVmain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminPOVmain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminPOVmain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SystemAdminPOVmain().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton SaCommunitylbl;

@@ -138,6 +138,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void SystemAdmLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SystemAdmLoginBtnActionPerformed
         // TODO add your handling code here:
+        SystemAdmLogin admin = new SystemAdmLogin ();
+        admin.show();
     }//GEN-LAST:event_SystemAdmLoginBtnActionPerformed
 
     private void HospitalAdmLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalAdmLoginBtnActionPerformed
