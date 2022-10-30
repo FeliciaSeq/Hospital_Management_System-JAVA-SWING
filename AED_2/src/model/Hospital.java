@@ -8,19 +8,11 @@ package model;
  *
  * @author felsparkle
  */
-public class Community {
-    private String City;
+public class Hospital {
+    
+    private String HospitalName;
     private String PinCode;  
-    private String Area;
-    private String State;
-
-    public String getCity() {
-        return City;
-    }
-
-    public void setCity(String City) {
-        this.City = City;
-    }
+    private String City;
 
     public String getPinCode() {
         return PinCode;
@@ -30,27 +22,28 @@ public class Community {
         this.PinCode = PinCode;
     }
 
+    public String getHospitalName() {
+        return HospitalName;
+    }
+
+    public void setHospitalName(String HospitalName) {
+        this.HospitalName = HospitalName;
+    }
+
     
 
-    public String getArea() {
-        return Area;
+    public String getCity() {
+        return City;
     }
 
-    public void setArea(String Area) {
-        this.Area = Area;
-    }
-
-    public String getState() {
-        return State;
-    }
-
-    public void setState(String State) {
-        this.State = State;
+    public void setCity(String City) {
+        this.City = City;
     }
     
     @Override
     public String toString(){
-        return City;
+        return HospitalName;
     }
+    
     
 }

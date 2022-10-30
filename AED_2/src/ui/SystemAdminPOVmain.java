@@ -6,7 +6,14 @@ package ui;
 
 import javax.swing.JFrame;
 import model.CommunityHistory;
+import model.DoctorHistory;
 import model.PersonHistory;
+import model.HospitalHistory;
+import model.DoctorNew;
+import model.DoctorNewHistory;
+import model.Person;
+import model.PersonHistory;
+       
 
 /**
  *
@@ -20,14 +27,23 @@ public class SystemAdminPOVmain extends javax.swing.JFrame {
     
     PersonHistory History;
     CommunityHistory CommHistory;
+    HospitalHistory HospHistory;
+    DoctorHistory DocHistory;
+    DoctorNewHistory DocNewHistory;
+    
     
     
     public SystemAdminPOVmain() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
+        this.DocNewHistory = DocNewHistory;
+        
         History = new PersonHistory();
         CommHistory = new CommunityHistory();
+        HospHistory = new HospitalHistory();
+        DocHistory = new DoctorHistory();
+        DocNewHistory = new DoctorNewHistory();
     }
 
     /**
@@ -127,18 +143,20 @@ public class SystemAdminPOVmain extends javax.swing.JFrame {
 
     private void SaHospitallblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaHospitallblActionPerformed
         // TODO add your handling code here:
+        SystemAdmPOVhospital admin = new SystemAdmPOVhospital (CommHistory, HospHistory,DocHistory,DocNewHistory,History);
+        admin.show();
     }//GEN-LAST:event_SaHospitallblActionPerformed
 
     private void SaPersonlblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaPersonlblActionPerformed
         // TODO add your handling code here:
-        SystemAdminPOVperson admin = new SystemAdminPOVperson (History);
+        SystemAdminPOVperson admin = new SystemAdminPOVperson (History, DocHistory);
         admin.show();
     }//GEN-LAST:event_SaPersonlblActionPerformed
 
     private void SaCommunitylblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaCommunitylblActionPerformed
         // TODO add your handling code here:
         
-        SystemAdmPOVcommunity admin = new SystemAdmPOVcommunity (CommHistory);
+        SystemAdmPOVcommunity admin = new SystemAdmPOVcommunity (CommHistory,HospHistory,DocHistory,DocNewHistory,History);
         admin.show();
     }//GEN-LAST:event_SaCommunitylblActionPerformed
 

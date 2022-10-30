@@ -19,6 +19,8 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
+        //this.DocNewHistory = DocNewHistory;
+        
     }
 
     /**

@@ -8,7 +8,7 @@ package model;
  *
  * @author felsparkle
  */
-public class Person {
+public class Doctor {
     private String Name;
     private String   ID;
     private String Age;
@@ -55,9 +55,5 @@ public class Person {
         this.IsPatient = IsPatient;
     }
     
-    @Override
-    public String toString(){
-        return Name;
-    }
     
 }

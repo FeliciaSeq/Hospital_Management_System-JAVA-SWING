@@ -7,6 +7,8 @@ package ui;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Doctor;
+import model.DoctorHistory;
 import model.Person;
 import model.PersonHistory;
 
@@ -22,14 +24,19 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
     
     
     PersonHistory History;
+    DoctorHistory DocHistory;
     
     
-    public SystemAdminPOVperson(PersonHistory History) {
+    
+    public SystemAdminPOVperson(PersonHistory History, DoctorHistory DocHistory) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.History = History;
+        this.DocHistory = DocHistory;
+        //this.DocNewHistory = DocNewHistory;
         
         populateTable();
+       // populateTableDoc();
     }
 
     /**
@@ -188,14 +195,7 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
 
         SearchPeTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Name", "ID", "Age", "Gender", "Is Patient?"
@@ -337,17 +337,16 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
 
     private void SubmitPeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitPeBtnActionPerformed
         // TODO add your handling code here:
+        
         String Name = NamePeTxt1.getText();
         
-  
-        long ID = Long.parseLong(IdPeTxt1.getText());
+        String ID = IdPeTxt1.getText();
         
-        int Age = Integer.parseInt(AgePeTxt1.getText());
+        String Age = AgePeTxt1.getText();
         
         String Gender = GenderPeTxt1.getText();
         
         String IsPatient = IsPatientPeTxt1.getText();
-        
         Person pe = History.addNewPerson();
         
         pe.setName(Name);
@@ -356,8 +355,41 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
         pe.setGender(Gender);
         pe.setIsPatient(IsPatient);
         
-        JOptionPane.showMessageDialog(this,"Person Added");
         populateTable();
+        
+        
+        if(IsPatient.equals("No")){
+        //Person pe = History.addNewPerson();
+        
+        Doctor p = DocHistory.addNewDoctor();
+        
+        p.setName(Name);
+        p.setID(ID);
+        p.setAge(Age);
+        p.setGender(Gender);
+        p.setIsPatient(IsPatient);
+        
+        //populateTableDoc();
+        
+        }
+        
+//        else if(IsPatient.equals("No")){
+//            
+//        Doctor p = DocHistory.addNewDoctor();
+//        
+//        p.setName(Name);
+//        p.setID(ID);
+//        p.setAge(Age);
+//        p.setGender(Gender);
+//        p.setIsPatient(IsPatient);
+//        
+//        populateTableDoc();
+//        
+//        }
+//        
+        
+        JOptionPane.showMessageDialog(this,"Person Added");
+        
         NamePeTxt1.setText("");
         IdPeTxt1.setText("");
         AgePeTxt1.setText("");
@@ -369,6 +401,7 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
 
     private void DeletePeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletePeBtnActionPerformed
         // TODO add your handling code here:
+        try{
         int selectedRowIndex = SearchPeTbl.getSelectedRow();
          if (selectedRowIndex<0){
              
@@ -384,6 +417,11 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
              
              JOptionPane.showMessageDialog(this,"Person deleted.");
              populateTable();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Person Not deleted.");
+            
+        }
          
          
     }//GEN-LAST:event_DeletePeBtnActionPerformed
@@ -412,7 +450,7 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
           
             if(String.valueOf(pe.getID()).equals(ID)){
                 pe.setName(Name);
-                pe.setAge(ABORT);
+                pe.setAge(Age);
                 pe.setGender(Gender);
                 pe.setIsPatient(IsPatient);
                 
@@ -494,6 +532,9 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) SearchPeTbl.getModel();
         model.setRowCount(0);
         
+//        if(model.getRowCount()==0) model.setRowCount(0);
+//        else model.setRowCount(model.getRowCount());
+        
         for(Person pe : History .getHistory()){
             
             Object [] row = new Object[5];
@@ -507,4 +548,29 @@ public class SystemAdminPOVperson extends javax.swing.JFrame {
             model.addRow(row);
     }
 }
+//    private void populateTableDoc() {
+//        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        
+//        DefaultTableModel model = (DefaultTableModel) SearchPeTbl.getModel();
+//        model.setRowCount(0);
+//        
+//        if(model.getRowCount()==0) model.setRowCount(0);
+//        else model.setRowCount(model.getRowCount());
+//        
+//        for(Doctor p : DocHistory .getDocHistory()){
+//            
+//            Object [] row = new Object[5];
+//            row[0] = p;
+//            row[1] = p.getID();
+//            row[2] = p.getAge();
+//            row[3] = p.getGender();
+//            row[4] = p.getIsPatient();
+//            
+//            
+//            model.addRow(row);
+//    }
+//    }
 }
+
+
+

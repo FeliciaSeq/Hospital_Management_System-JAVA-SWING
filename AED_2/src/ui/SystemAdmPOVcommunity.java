@@ -9,6 +9,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Community;
 import model.CommunityHistory;
+import model.HospitalHistory;
+import model.Doctor;
+import model.DoctorHistory;
+import model.DoctorNew;
+import model.DoctorNewHistory;
+import model.Person;
+import model.PersonHistory;
 
 /**
  *
@@ -21,11 +28,17 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
      */
     
     CommunityHistory CommHistory;
+    HospitalHistory HospHistory;
+    DoctorHistory DocHistory;
+    DoctorNewHistory DocNewHistory;
+    PersonHistory History;
     
     
-    public SystemAdmPOVcommunity(CommunityHistory CommHistory) {
+    public SystemAdmPOVcommunity(CommunityHistory CommHistory, HospitalHistory HospHistory,DoctorHistory DocHistory,DoctorNewHistory DocNewHistory,PersonHistory History) {
         initComponents();
         this.CommHistory = CommHistory;
+        this.HospHistory = new HospitalHistory();
+        this.DocNewHistory = DocNewHistory;
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         populateTable();
         
@@ -68,6 +81,7 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
         CommDeetsTbl = new javax.swing.JTable();
         SaSearchCommDeetsLbl = new javax.swing.JLabel();
         SaSearchCommDeetsTxt = new javax.swing.JTextField();
+        HospitalBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,7 +159,7 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
                     .addComponent(SaStateCommTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72)
                 .addComponent(SaAddCommBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         SystemAdmPOVSplitComm.setLeftComponent(SaAddCommDeetsPnl);
@@ -201,32 +215,17 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
             }
         });
 
+        HospitalBtn.setText("Hospital");
+        HospitalBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HospitalBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SaEditCommDeetsPnlLayout = new javax.swing.GroupLayout(SaEditCommDeetsPnl);
         SaEditCommDeetsPnl.setLayout(SaEditCommDeetsPnlLayout);
         SaEditCommDeetsPnlLayout.setHorizontalGroup(
             SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SaEditCommDeetsPnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(SaCityCommLbl2)
-                    .addComponent(SaPinCommLbl2))
-                .addGap(18, 18, 18)
-                .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SaCityCommTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SaPinCommTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(SaStateCommLbl2)
-                    .addComponent(SaAreaCommLbl2))
-                .addGap(18, 18, 18)
-                .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SaStateCommTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SaAreaCommTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SaUpdateCommBtn)
-                    .addComponent(SaDeleteCommBtn))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(SaEditCommDeetsPnlLayout.createSequentialGroup()
                 .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(SaEditCommDeetsPnlLayout.createSequentialGroup()
@@ -242,6 +241,31 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
                             .addGap(113, 113, 113)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(SaEditCommDeetsPnlLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(SaCityCommLbl2)
+                    .addComponent(SaPinCommLbl2))
+                .addGap(18, 18, 18)
+                .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(HospitalBtn)
+                    .addGroup(SaEditCommDeetsPnlLayout.createSequentialGroup()
+                        .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SaCityCommTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SaPinCommTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(SaStateCommLbl2)
+                            .addComponent(SaAreaCommLbl2))
+                        .addGap(18, 18, 18)
+                        .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SaStateCommTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SaAreaCommTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58)
+                        .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SaUpdateCommBtn)
+                            .addComponent(SaDeleteCommBtn))))
+                .addGap(0, 66, Short.MAX_VALUE))
         );
         SaEditCommDeetsPnlLayout.setVerticalGroup(
             SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,7 +299,9 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
                 .addGroup(SaEditCommDeetsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaSearchCommDeetsLbl)
                     .addComponent(SaSearchCommDeetsTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(HospitalBtn)
+                .addGap(57, 57, 57))
         );
 
         SystemAdmPOVSplitComm.setRightComponent(SaEditCommDeetsPnl);
@@ -284,7 +310,7 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SystemAdmPOVSplitComm, javax.swing.GroupLayout.DEFAULT_SIZE, 986, Short.MAX_VALUE)
+            .addComponent(SystemAdmPOVSplitComm)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,8 +387,9 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
         // TODO add your handling code here:
         String City = SaCityCommTxt1.getText();
         
-  
-        long PinCode = Long.parseLong(SaPinCommTxt1.getText());
+        String PinCode = SaPinCommTxt1.getText();
+        
+ 
         
         
         
@@ -405,10 +432,17 @@ public class SystemAdmPOVcommunity extends javax.swing.JFrame {
         SaStateCommTxt2.setText(State);        
     }//GEN-LAST:event_CommDeetsTblMouseClicked
 
+    private void HospitalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalBtnActionPerformed
+        // TODO add your handling code here:
+        SystemAdmPOVhospital Hospital = new SystemAdmPOVhospital(CommHistory,HospHistory,DocHistory,DocNewHistory,History);
+        Hospital.show();
+    }//GEN-LAST:event_HospitalBtnActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable CommDeetsTbl;
+    private javax.swing.JButton HospitalBtn;
     private javax.swing.JButton SaAddCommBtn;
     private javax.swing.JLabel SaAddCommDeetsLbl;
     private javax.swing.JPanel SaAddCommDeetsPnl;

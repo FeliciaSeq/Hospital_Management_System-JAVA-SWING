@@ -5,6 +5,18 @@
 package ui;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.Community;
+import model.CommunityHistory;
+import model.HospitalHistory;
+import model.Hospital;
+import javax.swing.table.DefaultTableModel;
+import model.Doctor;
+import model.DoctorHistory;
+import model.DoctorNew;
+import model.DoctorNewHistory;
+import model.Person;
+import model.PersonHistory;
 
 /**
  *
@@ -14,10 +26,80 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
 
     /**
      * Creates new form SystemAdmPOVhospital
+     * 
      */
-    public SystemAdmPOVhospital() {
+    private String[] PinCodeArray;
+    HospitalHistory HospHistory;
+    CommunityHistory CommHistory;
+    private String[] CityArray;
+    private String[] HospArray;
+    private String [] CityArray1;
+    DoctorHistory DocHistory;
+    DoctorNewHistory DocNewHistory;
+    PersonHistory History;
+    private String[] DocArray;
+    
+    public SystemAdmPOVhospital(CommunityHistory CommHistory,HospitalHistory HospHistory,DoctorHistory DocHistory,DoctorNewHistory DocNewHistory,PersonHistory History) {
+        
+    
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        
+        
+        this.HospHistory = HospHistory;
+        this.DocHistory = DocHistory;
+        this.CommHistory = CommHistory;
+        this.History = History;
+        this.DocNewHistory = DocNewHistory;
+        
+        
+        
+        int PinCodeArraySize = CommHistory.getCommHistory().size();
+        this.PinCodeArray = new String[PinCodeArraySize];
+        int itr = 0;
+        
+        for(Community community:CommHistory.getCommHistory()){
+            this.PinCodeArray [itr++] = community.getPinCode();
+        }
+        
+        HospitalPinCombo.setModel(new javax.swing.DefaultComboBoxModel<>(this.PinCodeArray));
+        
+        
+
+
+
+        
+        /////////////////////
+    
+        int CityArraySize = CommHistory.getCommHistory().size();
+        this.CityArray = new String[CityArraySize];
+        int itr1 = 0;
+       
+        for (Community community:CommHistory.getCommHistory() ){
+            this.CityArray [itr1++] = community.getCity();
+        }
+       
+        HospitalCityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(this.CityArray));
+        
+        
+        /////////////////////
+        
+        /*int DocArraySize = DocHistory.getDocHistory().size();
+        this.DocArray = new String[DocArraySize];
+        int itr4 = 0;
+        
+        for(Doctor doctor:DocHistory.getDocHistory()){
+            this.DocArray [itr4++] = doctor.getName();
+        }
+        DocNameCombo.setModel(new javax.swing.DefaultComboBoxModel<>(this.DocArray));*/
+        
+        
+        
+       
+       
+       
+    
     }
 
     /**
@@ -35,9 +117,7 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
         SaHspNameLbl1 = new javax.swing.JLabel();
         SaHspNameTxt1 = new javax.swing.JTextField();
         SaHspPinLbl1 = new javax.swing.JLabel();
-        SaHspPinTxt1 = new javax.swing.JTextField();
         SaHspCityLbl1 = new javax.swing.JLabel();
-        SaHspCityTxt1 = new javax.swing.JTextField();
         SaHspAddBtn = new javax.swing.JButton();
         SaHspTbl = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -45,20 +125,15 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
         SaSearchHspTxt = new javax.swing.JTextField();
         SaHspNameLbl2 = new javax.swing.JLabel();
         SaHspNameTxt2 = new javax.swing.JTextField();
-        SaHspPinLbl2 = new javax.swing.JLabel();
-        SaHspPinTxt2 = new javax.swing.JTextField();
-        SaHspCityLbl2 = new javax.swing.JLabel();
-        SaHspCityTxt2 = new javax.swing.JTextField();
         SaHspUpdateBtn = new javax.swing.JButton();
         SaHspDeleteBtn = new javax.swing.JButton();
+        HospitalPinCombo = new javax.swing.JComboBox<>();
+        HospitalCityCombo = new javax.swing.JComboBox<>();
         SaDocPnl = new javax.swing.JPanel();
         SaDocLbl = new javax.swing.JLabel();
         SaDocNameLbl1 = new javax.swing.JLabel();
-        SaDocNameTxt1 = new javax.swing.JTextField();
         SaDocHospNameLbl1 = new javax.swing.JLabel();
-        SaDocHospNameTxt1 = new javax.swing.JTextField();
         SaDocCityLbl1 = new javax.swing.JLabel();
-        SaDocCityTxt1 = new javax.swing.JTextField();
         SaDocAddBtn = new javax.swing.JButton();
         SaDocTbl = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -72,6 +147,9 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
         SaDocCityTxt2 = new javax.swing.JTextField();
         SaDocUpdateBtn = new javax.swing.JButton();
         SaDocDeleteBtn = new javax.swing.JButton();
+        DoctorCityCombo = new javax.swing.JComboBox<>();
+        HospNameCombo = new javax.swing.JComboBox<>();
+        DocNameTxt1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,21 +162,14 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
 
         SaHspPinLbl1.setText("Pin Code:");
 
-        SaHspPinTxt1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaHspPinTxt1ActionPerformed(evt);
-            }
-        });
-
         SaHspCityLbl1.setText("City:");
 
-        SaHspCityTxt1.addActionListener(new java.awt.event.ActionListener() {
+        SaHspAddBtn.setText("Add");
+        SaHspAddBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaHspCityTxt1ActionPerformed(evt);
+                SaHspAddBtnActionPerformed(evt);
             }
         });
-
-        SaHspAddBtn.setText("Add");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,31 +184,39 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
                 "Name of Hosp", "Pin Code", "City"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         SaHspTbl.setViewportView(jTable1);
 
         SaSearchHspLbl.setText("Search Hospital:");
 
         SaHspNameLbl2.setText("Name of the Hospital:");
 
-        SaHspPinLbl2.setText("Pin Code:");
-
-        SaHspPinTxt2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaHspPinTxt2ActionPerformed(evt);
-            }
-        });
-
-        SaHspCityLbl2.setText("City:");
-
-        SaHspCityTxt2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaHspCityTxt2ActionPerformed(evt);
-            }
-        });
-
         SaHspUpdateBtn.setText("Update");
+        SaHspUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaHspUpdateBtnActionPerformed(evt);
+            }
+        });
 
         SaHspDeleteBtn.setText("Delete");
+        SaHspDeleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaHspDeleteBtnActionPerformed(evt);
+            }
+        });
+
+        HospitalPinCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        HospitalCityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        HospitalCityCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HospitalCityComboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout SaHspPnlLayout = new javax.swing.GroupLayout(SaHspPnl);
         SaHspPnl.setLayout(SaHspPnlLayout);
@@ -157,10 +236,11 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(SaHspPnlLayout.createSequentialGroup()
-                                .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(SaHspPinTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(SaHspCityTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)
+                                .addGap(6, 6, 6)
+                                .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(HospitalPinCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(HospitalCityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(100, 100, 100)
                                 .addComponent(SaHspAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(SaHspNameTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(SaHspPnlLayout.createSequentialGroup()
@@ -170,15 +250,9 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
                         .addComponent(SaSearchHspTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(SaHspPnlLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SaHspNameLbl2)
-                            .addComponent(SaHspPinLbl2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SaHspCityLbl2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(SaHspNameLbl2)
                         .addGap(21, 21, 21)
-                        .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SaHspNameTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SaHspPinTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SaHspCityTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(SaHspNameTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(SaHspPnlLayout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addComponent(SaHspUpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,40 +272,28 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
                 .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SaHspNameLbl1)
                     .addComponent(SaHspNameTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SaHspPnlLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SaHspAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(SaHspPnlLayout.createSequentialGroup()
-                                .addComponent(SaHspPinLbl1)
-                                .addGap(29, 29, 29)
-                                .addComponent(SaHspCityLbl1))))
-                    .addGroup(SaHspPnlLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(SaHspPinTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(SaHspCityTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(43, 43, 43)
+                    .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(SaHspAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(SaHspPnlLayout.createSequentialGroup()
+                            .addComponent(SaHspPinLbl1)
+                            .addGap(26, 26, 26)
+                            .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(SaHspCityLbl1)
+                                .addComponent(HospitalCityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(HospitalPinCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
                 .addComponent(SaHspTbl, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaSearchHspLbl)
                     .addComponent(SaSearchHspTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SaHspNameLbl2)
-                    .addGroup(SaHspPnlLayout.createSequentialGroup()
-                        .addComponent(SaHspNameTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(SaHspPinTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SaHspPinLbl2))
-                        .addGap(18, 18, 18)
-                        .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(SaHspCityTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SaHspCityLbl2))))
-                .addGap(31, 31, 31)
+                    .addComponent(SaHspNameTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(113, 113, 113)
                 .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaHspUpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SaHspDeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -249,21 +311,14 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
 
         SaDocHospNameLbl1.setText("Hospital Name:");
 
-        SaDocHospNameTxt1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaDocHospNameTxt1ActionPerformed(evt);
-            }
-        });
-
         SaDocCityLbl1.setText("City:");
 
-        SaDocCityTxt1.addActionListener(new java.awt.event.ActionListener() {
+        SaDocAddBtn.setText("Add");
+        SaDocAddBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaDocCityTxt1ActionPerformed(evt);
+                SaDocAddBtnActionPerformed(evt);
             }
         });
-
-        SaDocAddBtn.setText("Add");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -303,15 +358,33 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
         SaDocUpdateBtn.setText("Update");
 
         SaDocDeleteBtn.setText("Delete");
+        SaDocDeleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaDocDeleteBtnActionPerformed(evt);
+            }
+        });
+
+        DoctorCityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        HospNameCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout SaDocPnlLayout = new javax.swing.GroupLayout(SaDocPnl);
         SaDocPnl.setLayout(SaDocPnlLayout);
         SaDocPnlLayout.setHorizontalGroup(
             SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SaDocPnlLayout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(SaDocLbl)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addGroup(SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(DocNameTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(SaDocPnlLayout.createSequentialGroup()
+                            .addGap(195, 195, 195)
+                            .addComponent(SaDocLbl))
+                        .addGroup(SaDocPnlLayout.createSequentialGroup()
+                            .addGap(153, 153, 153)
+                            .addGroup(SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(HospNameCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(DoctorCityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(201, Short.MAX_VALUE))
             .addGroup(SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(SaDocPnlLayout.createSequentialGroup()
                     .addContainerGap()
@@ -322,12 +395,7 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
                                 .addComponent(SaDocHospNameLbl1)
                                 .addComponent(SaDocNameLbl1)
                                 .addComponent(SaDocCityLbl1))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(SaDocCityTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(SaDocHospNameTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(SaDocNameTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                             .addComponent(SaDocAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(14, 14, 14))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SaDocPnlLayout.createSequentialGroup()
@@ -363,27 +431,27 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
             .addGroup(SaDocPnlLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(SaDocLbl)
-                .addContainerGap(616, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(DocNameTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(HospNameCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(DoctorCityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(496, Short.MAX_VALUE))
             .addGroup(SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(SaDocPnlLayout.createSequentialGroup()
                     .addGroup(SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(SaDocPnlLayout.createSequentialGroup()
                             .addGap(62, 62, 62)
-                            .addGroup(SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(SaDocNameLbl1)
-                                .addComponent(SaDocNameTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(12, 12, 12)
-                            .addGroup(SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(SaDocHospNameLbl1)
-                                .addComponent(SaDocHospNameTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(12, 12, 12)
-                            .addGroup(SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(SaDocCityLbl1)
-                                .addComponent(SaDocCityTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(SaDocNameLbl1)
+                            .addGap(18, 18, 18)
+                            .addComponent(SaDocHospNameLbl1)
+                            .addGap(18, 18, 18)
+                            .addComponent(SaDocCityLbl1))
                         .addGroup(SaDocPnlLayout.createSequentialGroup()
                             .addGap(79, 79, 79)
                             .addComponent(SaDocAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(18, 18, 18)
+                    .addGap(24, 24, 24)
                     .addComponent(SaDocTbl, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(15, 15, 15)
                     .addGroup(SaDocPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -415,7 +483,7 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SystemAdminPOVSplitHosp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 932, Short.MAX_VALUE)
+            .addComponent(SystemAdminPOVSplitHosp, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,30 +493,6 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SaHspPinTxt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaHspPinTxt1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SaHspPinTxt1ActionPerformed
-
-    private void SaHspCityTxt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaHspCityTxt1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SaHspCityTxt1ActionPerformed
-
-    private void SaHspPinTxt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaHspPinTxt2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SaHspPinTxt2ActionPerformed
-
-    private void SaHspCityTxt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaHspCityTxt2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SaHspCityTxt2ActionPerformed
-
-    private void SaDocHospNameTxt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaDocHospNameTxt1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SaDocHospNameTxt1ActionPerformed
-
-    private void SaDocCityTxt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaDocCityTxt1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SaDocCityTxt1ActionPerformed
-
     private void SaDocHospNameTxt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaDocHospNameTxt2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SaDocHospNameTxt2ActionPerformed
@@ -457,65 +501,214 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SaDocCityTxt2ActionPerformed
 
+    private void SaHspAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaHspAddBtnActionPerformed
+        // TODO add your handling code here:
+        try{
+            String HospitalName = SaHspNameTxt1.getText();
+            String PinCode = HospitalPinCombo.getSelectedItem().toString();
+            String City = HospitalCityCombo.getSelectedItem().toString();
+            
+            Hospital h = this.HospHistory.addNewHospital();
+            
+            h.setHospitalName(HospitalName);
+            h.setCity(City);
+            h.setPinCode(PinCode);
+            
+            JOptionPane.showMessageDialog(this, "Details added.");
+            populateTable();
+            
+            SaHspNameTxt1.setText("");
+            
+            
+            //combo box code for Hospital Name
+            int HospArraySize = HospHistory.getHospHistory().size();
+        this.HospArray = new String[HospArraySize];
+        int itr2 = 0;
+        
+        for (Hospital hospital: HospHistory.getHospHistory()){
+            this.HospArray [itr2++] = hospital.getHospitalName();
+                    
+        }
+        HospNameCombo.setModel(new javax.swing.DefaultComboBoxModel<>(this.HospArray));
+        
+        
+        //combo box code for City
+        int CityArraySize = HospHistory.getHospHistory().size();
+        this.CityArray1 = new String[CityArraySize];
+        int itr3 = 0;
+       
+        for (Hospital hospital:HospHistory.getHospHistory() ){
+            this.CityArray1 [itr3++] = hospital.getCity();
+        }
+       
+        DoctorCityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(this.CityArray1));
+        
+        
+        
+        
+            
+            
+            
+            
+        }
+        catch (Exception e){
+            //System.out.println(e);
+            //JOptionPane.showMessageDialog(this, "Please make sure all data is entered");
+            
+        }
+    }//GEN-LAST:event_SaHspAddBtnActionPerformed
+
+    private void SaHspDeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaHspDeleteBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+         if (selectedRowIndex<0){
+             
+             JOptionPane.showMessageDialog(this,"Select a row to delete.");
+             return;
+         
+         }
+         
+         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+         Hospital selectedHospital = (Hospital) model.getValueAt(selectedRowIndex, 0); 
+         
+         HospHistory.deleteHospital(selectedHospital);
+             
+             JOptionPane.showMessageDialog(this,"Hospital deleted.");
+             populateTable();
+    }//GEN-LAST:event_SaHspDeleteBtnActionPerformed
+
+    private void SaHspUpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaHspUpdateBtnActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model =(DefaultTableModel) jTable1.getModel();
+      if(jTable1.getSelectedRowCount()==1){
+         
+     
+        String HospitalName = SaHspNameTxt2.getText();
+        
+        
+        
+        
+        
+       
+        model.setValueAt(HospitalName,jTable1.getSelectedRow(),0);
+        
+        
+        
+        for(Hospital h : HospHistory.getHospHistory()){
+          
+            
+                h.setHospitalName(HospitalName);
+                
+                
+                
+                
+            
+            
+        }
+        
+       
+       
+        JOptionPane.showMessageDialog(this,"Community Details Updated Successfully.");
+        
+      }
+    }//GEN-LAST:event_SaHspUpdateBtnActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model =(DefaultTableModel) jTable1.getModel();
+
+
+            String HospitalName = model.getValueAt(jTable1.getSelectedRow(),0).toString();
+            
+            
+            
+
+            SaHspNameTxt2.setText(HospitalName);
+         
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void HospitalCityComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalCityComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HospitalCityComboActionPerformed
+
+    private void SaDocAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaDocAddBtnActionPerformed
+        // TODO add your handling code here:
+        
+            String DoctorName = DocNameTxt1.getText();
+            String HospitalName = HospNameCombo.getSelectedItem().toString();
+            String City = DoctorCityCombo.getSelectedItem().toString();
+            
+            DoctorNew d = this.DocNewHistory.addNewDoctor();
+            
+            d.setDoctorName(DoctorName);
+            d.setHospitalName(HospitalName);
+            d.setCity(City);
+            
+            
+            JOptionPane.showMessageDialog(this, "Details added.");
+            populateTableNew();
+            
+            
+            
+        
+        
+            
+        
+        
+          
+            
+    }//GEN-LAST:event_SaDocAddBtnActionPerformed
+
+    private void SaDocDeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaDocDeleteBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable2.getSelectedRow();
+         if (selectedRowIndex<0){
+             
+             JOptionPane.showMessageDialog(this,"Select a row to delete.");
+             return;
+         
+         }
+         
+         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+         DoctorNew selectedDoctor = (DoctorNew) model.getValueAt(selectedRowIndex, 0); 
+         
+         DocNewHistory.deleteDoctorNew(selectedDoctor);
+             
+             JOptionPane.showMessageDialog(this,"It's Illegal to delete Doctor.");
+             populateTable();
+        
+        
+    }//GEN-LAST:event_SaDocDeleteBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SystemAdmPOVhospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SystemAdmPOVhospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SystemAdmPOVhospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SystemAdmPOVhospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SystemAdmPOVhospital().setVisible(true);
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField DocNameTxt1;
+    private javax.swing.JComboBox<String> DoctorCityCombo;
+    private javax.swing.JComboBox<String> HospNameCombo;
+    private javax.swing.JComboBox<String> HospitalCityCombo;
+    private javax.swing.JComboBox<String> HospitalPinCombo;
     private javax.swing.JButton SaDocAddBtn;
     private javax.swing.JLabel SaDocCityLbl1;
     private javax.swing.JLabel SaDocCityLbl2;
-    private javax.swing.JTextField SaDocCityTxt1;
     private javax.swing.JTextField SaDocCityTxt2;
     private javax.swing.JButton SaDocDeleteBtn;
     private javax.swing.JLabel SaDocHospNameLbl1;
     private javax.swing.JLabel SaDocHospNameLbl2;
-    private javax.swing.JTextField SaDocHospNameTxt1;
     private javax.swing.JTextField SaDocHospNameTxt2;
     private javax.swing.JLabel SaDocLbl;
     private javax.swing.JLabel SaDocNameLbl1;
     private javax.swing.JLabel SaDocNameLbl2;
-    private javax.swing.JTextField SaDocNameTxt1;
     private javax.swing.JTextField SaDocNameTxt2;
     private javax.swing.JPanel SaDocPnl;
     private javax.swing.JScrollPane SaDocTbl;
     private javax.swing.JButton SaDocUpdateBtn;
     private javax.swing.JButton SaHspAddBtn;
     private javax.swing.JLabel SaHspCityLbl1;
-    private javax.swing.JLabel SaHspCityLbl2;
-    private javax.swing.JTextField SaHspCityTxt1;
-    private javax.swing.JTextField SaHspCityTxt2;
     private javax.swing.JButton SaHspDeleteBtn;
     private javax.swing.JLabel SaHspLbl;
     private javax.swing.JLabel SaHspNameLbl1;
@@ -523,9 +716,6 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
     private javax.swing.JTextField SaHspNameTxt1;
     private javax.swing.JTextField SaHspNameTxt2;
     private javax.swing.JLabel SaHspPinLbl1;
-    private javax.swing.JLabel SaHspPinLbl2;
-    private javax.swing.JTextField SaHspPinTxt1;
-    private javax.swing.JTextField SaHspPinTxt2;
     private javax.swing.JPanel SaHspPnl;
     private javax.swing.JScrollPane SaHspTbl;
     private javax.swing.JButton SaHspUpdateBtn;
@@ -537,4 +727,50 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        for(Hospital h : HospHistory .getHospHistory()){
+            
+            //System.out.println(h.getPinCode());
+            
+            Object [] row = new Object[3];
+            row[0] = h;
+            row[1] = h.getPinCode();
+            row[2] = h.getCity();
+            
+            
+            
+            
+            model.addRow(row);
+    }
 }
+    
+    private void populateTableNew() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        
+        for(DoctorNew d : DocNewHistory .getDocNewHistory()){
+            
+            //System.out.println(h.getPinCode());
+            
+            Object [] row = new Object[3];
+            row[0] = d;
+            row[1] = d.getHospitalName();
+            row[2] = d.getCity();
+            
+            
+            
+            
+            model.addRow(row);
+    }
+}
+}
+
+
