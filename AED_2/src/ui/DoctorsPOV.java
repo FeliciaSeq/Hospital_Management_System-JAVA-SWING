@@ -5,6 +5,10 @@
 package ui;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.VitalSigns;
+import model.VitalSignsHistory;
 
 /**
  *
@@ -15,9 +19,15 @@ public class DoctorsPOV extends javax.swing.JFrame {
     /**
      * Creates new form DoctorsPOV
      */
-    public DoctorsPOV() {
+    
+    VitalSignsHistory VitalsHistory;
+    
+    //VitalSignsHistory VitalsHistory;
+    
+    public DoctorsPOV(VitalSignsHistory VitalsHistory) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.VitalsHistory = VitalsHistory;
     }
 
     /**
@@ -46,7 +56,6 @@ public class DoctorsPOV extends javax.swing.JFrame {
         DocWeightTxt = new javax.swing.JTextField();
         DocWeightLbl = new javax.swing.JLabel();
         DocAddBtn = new javax.swing.JButton();
-        DocUpdateBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,13 +64,13 @@ public class DoctorsPOV extends javax.swing.JFrame {
 
         DocPovTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "ID", "Temperature", "Pressure", "Pulse", "Height", "Weight", "Time of Appointment"
+                "Temperature", "Pressure", "Pulse", "Height", "Weight", "Time of Appointment"
             }
         ));
         DocPovScroll.setViewportView(DocPovTbl);
@@ -121,16 +130,10 @@ public class DoctorsPOV extends javax.swing.JFrame {
             }
         });
 
-        DocUpdateBtn.setText("Update");
-
         javax.swing.GroupLayout DoctorsPovPnlLayout = new javax.swing.GroupLayout(DoctorsPovPnl);
         DoctorsPovPnl.setLayout(DoctorsPovPnlLayout);
         DoctorsPovPnlLayout.setHorizontalGroup(
             DoctorsPovPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DoctorsPovPnlLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PatientDeetsLbl)
-                .addGap(363, 363, 363))
             .addComponent(DocPovScroll, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(DoctorsPovPnlLayout.createSequentialGroup()
                 .addGroup(DoctorsPovPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,13 +163,17 @@ public class DoctorsPOV extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addComponent(DocWeightLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DocWeightTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DoctorsPovPnlLayout.createSequentialGroup()
-                        .addGap(352, 352, 352)
-                        .addComponent(DocAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84)
-                        .addComponent(DocUpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(DocWeightTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(160, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DoctorsPovPnlLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(DoctorsPovPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DoctorsPovPnlLayout.createSequentialGroup()
+                        .addComponent(PatientDeetsLbl)
+                        .addGap(363, 363, 363))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DoctorsPovPnlLayout.createSequentialGroup()
+                        .addComponent(DocAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(474, 474, 474))))
         );
         DoctorsPovPnlLayout.setVerticalGroup(
             DoctorsPovPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,11 +200,9 @@ public class DoctorsPOV extends javax.swing.JFrame {
                     .addComponent(DocHeightTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DocWeightLbl)
                     .addComponent(DocWeightTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(DoctorsPovPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DocAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DocUpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(DocAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -240,42 +245,49 @@ public class DoctorsPOV extends javax.swing.JFrame {
 
     private void DocAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocAddBtnActionPerformed
         // TODO add your handling code here:
+        try{
+        String Weight = DocWeightTxt.getText();
+        
+        String Height = DocHeightTxt.getText();
+        
+        String Temperature = DocTempTxt.getText();
+        
+        String Pressure = DocPressureTxt.getText();
+        
+        String Pulse = DocPulseTxt.getText();
+        
+        VitalSigns v = new VitalSigns(Weight, Height, Temperature, Pressure, Pulse);
+        VitalSignsHistory.addNewVitalSign(v);
+                
+        
+        v.setWeight(Weight);
+        v.setHeight(Height);
+        v.setTemperature(Temperature);
+        v.setPressure(Pressure);
+        v.setPulse(Pulse);
+        
+        populateTable();
+        
+        
+        
+        
+        v.setWeight("");
+        v.setHeight("");
+        v.setTemperature("");
+        v.setPressure("");
+        v.setPulse("");
+        }
+        catch(Exception e){
+            System.out.print(e);
+        }
+        
+        
     }//GEN-LAST:event_DocAddBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DoctorsPOV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DoctorsPOV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DoctorsPOV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DoctorsPOV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DoctorsPOV().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DocAddBtn;
@@ -291,10 +303,31 @@ public class DoctorsPOV extends javax.swing.JFrame {
     private javax.swing.JTextField DocPulseTxt;
     private javax.swing.JLabel DocTempLbl;
     private javax.swing.JTextField DocTempTxt;
-    private javax.swing.JButton DocUpdateBtn;
     private javax.swing.JLabel DocWeightLbl;
     private javax.swing.JTextField DocWeightTxt;
     private javax.swing.JPanel DoctorsPovPnl;
     private javax.swing.JLabel PatientDeetsLbl;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       DefaultTableModel model = (DefaultTableModel) DocPovTbl.getModel();
+        model.setRowCount(0);
+        
+//        if(model.getRowCount()==0) model.setRowCount(0);
+//        else model.setRowCount(model.getRowCount());
+        
+        for(VitalSigns v :  VitalsHistory.getVitalsHistory()){
+            
+            Object [] row = new Object[5];
+            row[0] = v;
+            row[1] = v.getHeight();
+            row[2] = v.getTemperature();
+            row[3] = v.getPressure();
+            row[4] = v.getPulse();
+            
+            
+            model.addRow(row);
+    }
+    }
 }

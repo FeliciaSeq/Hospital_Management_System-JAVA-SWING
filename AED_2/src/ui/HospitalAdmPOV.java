@@ -4,7 +4,20 @@
  */
 package ui;
 
+
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.Community;
+import model.CommunityHistory;
+import model.HospitalHistory;
+import model.Hospital;
+import javax.swing.table.DefaultTableModel;
+import model.Doctor;
+import model.DoctorHistory;
+import model.DoctorNew;
+import model.DoctorNewHistory;
+import model.Person;
+import model.PersonHistory;
 
 /**
  *
@@ -15,9 +28,54 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
     /**
      * Creates new form HospitalAdmPOV
      */
-    public HospitalAdmPOV() {
+    private String[] PinCodeArray;
+    HospitalHistory HospHistory;
+    CommunityHistory CommHistory;
+    private String[] CityArray;
+    private String[] HospArray;
+    private String [] CityArray1;
+    DoctorHistory DocHistory;
+    DoctorNewHistory DocNewHistory;
+    PersonHistory History;
+    private String[] DocArray;
+    
+    
+    
+    public HospitalAdmPOV(CommunityHistory CommHistory,HospitalHistory HospHistory,DoctorHistory DocHistory,DoctorNewHistory DocNewHistory,PersonHistory History) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        
+        this.HospHistory = HospHistory;
+        this.DocHistory = DocHistory;
+        this.CommHistory = CommHistory;
+        this.History = History;
+        this.DocNewHistory = DocNewHistory;
+        
+        
+        
+        
+        /*int PinCodeArraySize = CommHistory.getCommHistory().size();
+        this.PinCodeArray = new String[PinCodeArraySize];
+        int itr = 0;
+        
+        for(Community community:CommHistory.getCommHistory()){
+            this.PinCodeArray [itr++] = community.getPinCode();
+        }
+        
+        //HospitalPinCombo.setModel(new javax.swing.DefaultComboBoxModel<>(this.PinCodeArray));
+        /////////////
+        
+        
+        int CityArraySize = CommHistory.getCommHistory().size();
+        this.CityArray = new String[CityArraySize];
+        int itr1 = 0;
+       
+        for (Community community:CommHistory.getCommHistory() ){
+            this.CityArray [itr1++] = community.getCity();
+        }*/
+       
+        //HospitalCityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(this.CityArray));
     }
 
     /**
@@ -38,10 +96,11 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
         HospNameLbl = new javax.swing.JLabel();
         HospNameTxt = new javax.swing.JTextField();
         DoctorNameLbl = new javax.swing.JLabel();
-        DocNameTxt = new javax.swing.JTextField();
+        PinCodeTxt = new javax.swing.JTextField();
         CityLbl = new javax.swing.JLabel();
         CityTxt = new javax.swing.JTextField();
         HospAdmAddBtn = new javax.swing.JButton();
+        HospAdmUpdateBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,7 +115,7 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Hospital Name", "Doctor's Name", "City"
+                "Hospital Name", "Pin Code", "City"
             }
         ));
         HospAdmPOVScroll.setViewportView(HospAdmPOVTbl);
@@ -71,11 +130,11 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
             }
         });
 
-        DoctorNameLbl.setText("Doctor's Name");
+        DoctorNameLbl.setText("PinCode:");
 
-        DocNameTxt.addActionListener(new java.awt.event.ActionListener() {
+        PinCodeTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DocNameTxtActionPerformed(evt);
+                PinCodeTxtActionPerformed(evt);
             }
         });
 
@@ -91,6 +150,13 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
         HospAdmAddBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HospAdmAddBtnActionPerformed(evt);
+            }
+        });
+
+        HospAdmUpdateBtn.setText("Update");
+        HospAdmUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HospAdmUpdateBtnActionPerformed(evt);
             }
         });
 
@@ -110,28 +176,30 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
                         .addComponent(HospAdmSearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HospAdmPOVPnlLayout.createSequentialGroup()
-                .addContainerGap(144, Short.MAX_VALUE)
+                .addContainerGap(178, Short.MAX_VALUE)
                 .addGroup(HospAdmPOVPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HospAdmPOVPnlLayout.createSequentialGroup()
                         .addComponent(HospAdmLbl)
                         .addGap(378, 378, 378))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HospAdmPOVPnlLayout.createSequentialGroup()
-                        .addComponent(HospNameLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(HospNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(HospAdmPOVPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(HospAdmAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(HospAdmPOVPnlLayout.createSequentialGroup()
+                                .addComponent(HospNameLbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(HospNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(38, 38, 38)
-                        .addComponent(DoctorNameLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DocNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(CityLbl)
+                        .addGroup(HospAdmPOVPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HospAdmPOVPnlLayout.createSequentialGroup()
+                                .addComponent(DoctorNameLbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(PinCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addComponent(CityLbl))
+                            .addComponent(HospAdmUpdateBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(165, 165, 165))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HospAdmPOVPnlLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(HospAdmAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(430, 430, 430))
         );
         HospAdmPOVPnlLayout.setVerticalGroup(
             HospAdmPOVPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,12 +217,14 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
                     .addComponent(HospNameLbl)
                     .addComponent(HospNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DoctorNameLbl)
-                    .addComponent(DocNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PinCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CityLbl)
                     .addComponent(CityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
-                .addComponent(HospAdmAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addGap(82, 82, 82)
+                .addGroup(HospAdmPOVPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(HospAdmAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HospAdmUpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -175,9 +245,9 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_HospNameTxtActionPerformed
 
-    private void DocNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocNameTxtActionPerformed
+    private void PinCodeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PinCodeTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_DocNameTxtActionPerformed
+    }//GEN-LAST:event_PinCodeTxtActionPerformed
 
     private void CityTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CityTxtActionPerformed
         // TODO add your handling code here:
@@ -185,47 +255,42 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
 
     private void HospAdmAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospAdmAddBtnActionPerformed
         // TODO add your handling code here:
+        String HospitalName = HospNameTxt.getText();
+        String PinCode = PinCodeTxt.getText();
+        String City = CityTxt.getText();
+        
+        
+        
+        Hospital h = this.HospHistory.addNewHospital();
+            
+            h.setHospitalName(HospitalName);
+            h.setCity(City);
+            h.setPinCode(PinCode);
+            
+            System.out.println(h.getPinCode());
+            
+            JOptionPane.showMessageDialog(this, "Details added.");
+            
+            populateTable();
+            
+            HospNameTxt.setText("");
+            PinCodeTxt.setText("");
+            CityTxt.setText("");
+        
     }//GEN-LAST:event_HospAdmAddBtnActionPerformed
+
+    private void HospAdmUpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospAdmUpdateBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HospAdmUpdateBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HospitalAdmPOV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HospitalAdmPOV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HospitalAdmPOV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HospitalAdmPOV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HospitalAdmPOV().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CityLbl;
     private javax.swing.JTextField CityTxt;
-    private javax.swing.JTextField DocNameTxt;
     private javax.swing.JLabel DoctorNameLbl;
     private javax.swing.JButton HospAdmAddBtn;
     private javax.swing.JLabel HospAdmLbl;
@@ -234,7 +299,30 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
     private javax.swing.JTable HospAdmPOVTbl;
     private javax.swing.JLabel HospAdmSearchLbl;
     private javax.swing.JTextField HospAdmSearchTxt;
+    private javax.swing.JButton HospAdmUpdateBtn;
     private javax.swing.JLabel HospNameLbl;
     private javax.swing.JTextField HospNameTxt;
+    private javax.swing.JTextField PinCodeTxt;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DefaultTableModel model = (DefaultTableModel) HospAdmPOVTbl.getModel();
+        model.setRowCount(0);
+        
+        for(Hospital h : HospHistory .getHospHistory()){
+            
+            //System.out.println(h.getPinCode());
+            
+            Object [] row = new Object[3];
+            row[0] = h;
+            row[1] = h.getPinCode();
+            row[2] = h.getCity();
+            
+            
+            
+            
+            model.addRow(row);
+    }
+    }
 }

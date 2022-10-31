@@ -5,6 +5,13 @@
 package ui;
 
 import javax.swing.JFrame;
+import model.CommunityHistory;
+import model.DoctorHistory;
+import model.DoctorNewHistory;
+import model.HospitalHistory;
+import model.PersonHistory;
+import model.VitalSigns;
+import model.VitalSignsHistory;
 
 /**
  *
@@ -15,11 +22,26 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+    
+    HospitalHistory HospHistory;
+    CommunityHistory CommHistory;
+    
+    DoctorHistory DocHistory;
+    DoctorNewHistory DocNewHistory;
+    PersonHistory History;
+    VitalSignsHistory VitalsHistory;
+    
     public MainFrame() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
-        //this.DocNewHistory = DocNewHistory;
+        
+        this.HospHistory = HospHistory;
+        this.DocHistory = DocHistory;
+        this.CommHistory = CommHistory;
+        this.History = History;
+        this.DocNewHistory = DocNewHistory;
+        this.VitalsHistory = VitalsHistory;
         
     }
 
@@ -146,6 +168,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void HospitalAdmLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalAdmLoginBtnActionPerformed
         // TODO add your handling code here:
+        HospitalAdmLogin admin = new HospitalAdmLogin ();
+        admin.show();
     }//GEN-LAST:event_HospitalAdmLoginBtnActionPerformed
 
     private void PatientLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientLoginBtnActionPerformed
@@ -154,6 +178,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void DoctorLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorLoginBtnActionPerformed
         // TODO add your handling code here:
+        DoctorLogin admin = new DoctorLogin (VitalsHistory);
+        admin.show();
     }//GEN-LAST:event_DoctorLoginBtnActionPerformed
 
     /**

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -54,32 +54,37 @@
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="144" max="32767" attributes="0"/>
+                  <EmptySpace pref="178" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="HospAdmLbl" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="378" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="HospNameLbl" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="HospNameTxt" min="-2" pref="140" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="HospAdmAddBtn" min="-2" pref="123" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="HospNameLbl" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="HospNameTxt" min="-2" pref="140" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                          <Component id="DoctorNameLbl" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="DocNameTxt" min="-2" pref="140" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="CityLbl" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="DoctorNameLbl" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="PinCodeTxt" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="CityLbl" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="HospAdmUpdateBtn" alignment="1" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="CityTxt" min="-2" pref="140" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="HospAdmAddBtn" min="-2" pref="123" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="430" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -100,13 +105,16 @@
                       <Component id="HospNameLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="HospNameTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="DoctorNameLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="DocNameTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="PinCodeTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="CityLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="CityTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                  <Component id="HospAdmAddBtn" min="-2" pref="62" max="-2" attributes="0"/>
-                  <EmptySpace pref="118" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="HospAdmAddBtn" alignment="3" min="-2" pref="62" max="-2" attributes="0"/>
+                      <Component id="HospAdmUpdateBtn" alignment="3" min="-2" pref="62" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="111" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -132,7 +140,7 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="3" rowCount="4">
                     <Column editable="true" title="Hospital Name" type="java.lang.Object"/>
-                    <Column editable="true" title="Doctor&apos;s Name" type="java.lang.Object"/>
+                    <Column editable="true" title="Pin Code" type="java.lang.Object"/>
                     <Column editable="true" title="City" type="java.lang.Object"/>
                   </Table>
                 </Property>
@@ -181,12 +189,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="DoctorNameLbl">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Doctor&apos;s Name"/>
+            <Property name="text" type="java.lang.String" value="PinCode:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="DocNameTxt">
+        <Component class="javax.swing.JTextField" name="PinCodeTxt">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DocNameTxtActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PinCodeTxtActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="CityLbl">
@@ -205,6 +213,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HospAdmAddBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="HospAdmUpdateBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Update"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HospAdmUpdateBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -5,6 +5,9 @@
 package ui;
 
 import javax.swing.JFrame;
+import model.VitalSignsHistory;
+import model.VitalSigns;
+import model.VitalSignsHistory;
 
 /**
  *
@@ -15,9 +18,13 @@ public class DoctorLogin extends javax.swing.JFrame {
     /**
      * Creates new form DoctorLogin
      */
-    public DoctorLogin() {
+    
+    VitalSignsHistory VitalsHistory;
+    
+    public DoctorLogin(VitalSignsHistory VitalsHistory) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.VitalsHistory = VitalsHistory;
     }
 
     /**
@@ -47,6 +54,11 @@ public class DoctorLogin extends javax.swing.JFrame {
         PasswordLblD.setText("Password :");
 
         LoginBtnD.setText("Login");
+        LoginBtnD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginBtnDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout DoctorLoginPanelLayout = new javax.swing.GroupLayout(DoctorLoginPanel);
         DoctorLoginPanel.setLayout(DoctorLoginPanelLayout);
@@ -103,40 +115,17 @@ public class DoctorLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void LoginBtnDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnDActionPerformed
+        // TODO add your handling code here:
+        
+        DoctorsPOV admin = new DoctorsPOV (VitalsHistory);
+        admin.show();
+    }//GEN-LAST:event_LoginBtnDActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DoctorLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DoctorLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DoctorLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DoctorLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DoctorLogin().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DloginLbl;

@@ -6,6 +6,18 @@ package ui;
 
 import javax.swing.JFrame;
 
+import javax.swing.JOptionPane;
+import model.Community;
+import model.CommunityHistory;
+import model.HospitalHistory;
+import model.Hospital;
+import model.Doctor;
+import model.DoctorHistory;
+import model.DoctorNew;
+import model.DoctorNewHistory;
+import model.Person;
+import model.PersonHistory;
+
 /**
  *
  * @author felsparkle
@@ -15,9 +27,28 @@ public class HospitalAdmLogin extends javax.swing.JFrame {
     /**
      * Creates new form HospitalAdmLogin
      */
+    
+    HospitalHistory HospHistory;
+    CommunityHistory CommHistory;
+    
+    DoctorHistory DocHistory;
+    DoctorNewHistory DocNewHistory;
+    PersonHistory History;
+    
+    
+    
+    
     public HospitalAdmLogin() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        this.HospHistory = HospHistory;
+        this.DocHistory = DocHistory;
+        this.CommHistory = CommHistory;
+        this.History = History;
+        this.DocNewHistory = DocNewHistory;
+        
+        
     }
 
     /**
@@ -47,6 +78,11 @@ public class HospitalAdmLogin extends javax.swing.JFrame {
         PasswordLblH.setText("Password :");
 
         LoginBtnH.setText("Login");
+        LoginBtnH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginBtnHActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout HospitalLoginAdmPanelLayout = new javax.swing.GroupLayout(HospitalLoginAdmPanel);
         HospitalLoginAdmPanel.setLayout(HospitalLoginAdmPanelLayout);
@@ -106,6 +142,13 @@ public class HospitalAdmLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void LoginBtnHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnHActionPerformed
+        // TODO add your handling code here:
+        HospitalAdmPOV admin = new HospitalAdmPOV ( CommHistory, HospHistory, DocHistory, DocNewHistory, History);
+        admin.show();
+        
+    }//GEN-LAST:event_LoginBtnHActionPerformed
 
     /**
      * @param args the command line arguments
