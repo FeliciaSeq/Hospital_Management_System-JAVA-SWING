@@ -17,7 +17,7 @@ public class VitalSignsHistory {
 ////        this.VitalsHistory = new ArrayList<VitalSigns>();   
 //    }
 
-    public ArrayList<VitalSigns> getVitalsHistory() {
+    public static ArrayList<VitalSigns> getVitalsHistory() {
         return VitalsHistory;
     }
 

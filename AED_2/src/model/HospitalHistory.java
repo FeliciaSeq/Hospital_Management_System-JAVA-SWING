@@ -11,25 +11,25 @@ import java.util.ArrayList;
  * @author felsparkle
  */
 public class HospitalHistory {
-    private ArrayList<Hospital> HospHistory;
+    private static ArrayList<Hospital> HospHistory = new ArrayList<>();
     
-    public HospitalHistory() {
-        this.HospHistory = new ArrayList<Hospital>();
+   // public HospitalHistory() {
+    //    this.HospHistory = new ArrayList<Hospital>();
     
-}
 
-    public ArrayList<Hospital> getHospHistory() {
+
+    public static ArrayList<Hospital> getHospHistory() {
         return HospHistory;
     }
 
-    public void setHospHistory(ArrayList<Hospital> HospHistory) {
-        this.HospHistory = HospHistory;
+    public static void setHospHistory(ArrayList<Hospital> HospHistory) {
+        HospitalHistory.HospHistory = HospHistory;
     }
-    public Hospital addNewHospital(){
+    public static void  addNewHospital(Hospital newHospital){
         
-        Hospital newHospital = new Hospital();
-        HospHistory.add(newHospital);
-        return newHospital;
+//        Hospital newHospital = new Hospital();
+        HospitalHistory.HospHistory.add(newHospital);
+//        return newHospital;
         
         
     }

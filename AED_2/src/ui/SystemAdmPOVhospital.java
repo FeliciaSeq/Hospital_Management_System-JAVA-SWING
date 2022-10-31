@@ -508,11 +508,15 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
             String PinCode = HospitalPinCombo.getSelectedItem().toString();
             String City = HospitalCityCombo.getSelectedItem().toString();
             
-            Hospital h = this.HospHistory.addNewHospital();
-            
-            h.setHospitalName(HospitalName);
-            h.setCity(City);
-            h.setPinCode(PinCode);
+//            Hospital h = this.HospHistory.addNewHospital();
+//            
+//            h.setHospitalName(HospitalName);
+//            h.setCity(City);
+//            h.setPinCode(PinCode);
+        Hospital h = new Hospital(HospitalName, PinCode, City);
+//        Hospital h = this.HospHistory.addNewHospital();
+        HospitalHistory.addNewHospital(h);
+      
             
             JOptionPane.showMessageDialog(this, "Details added.");
             populateTable();

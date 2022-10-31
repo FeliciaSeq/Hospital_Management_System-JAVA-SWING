@@ -260,8 +260,10 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
         String City = CityTxt.getText();
         
         
+        Hospital h = new Hospital(HospitalName, PinCode, City);
+//        Hospital h = this.HospHistory.addNewHospital();
+        HospitalHistory.addNewHospital(h);
         
-        Hospital h = this.HospHistory.addNewHospital();
             
             h.setHospitalName(HospitalName);
             h.setCity(City);
@@ -310,7 +312,7 @@ public class HospitalAdmPOV extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) HospAdmPOVTbl.getModel();
         model.setRowCount(0);
         
-        for(Hospital h : HospHistory .getHospHistory()){
+        for(Hospital h : HospitalHistory.getHospHistory()){
             
             //System.out.println(h.getPinCode());
             

@@ -317,7 +317,7 @@ public class DoctorsPOV extends javax.swing.JFrame {
 //        if(model.getRowCount()==0) model.setRowCount(0);
 //        else model.setRowCount(model.getRowCount());
         
-        for(VitalSigns v :  VitalsHistory.getVitalsHistory()){
+        for(VitalSigns v :  VitalSignsHistory.getVitalsHistory()){
             
             Object [] row = new Object[5];
             row[0] = v;

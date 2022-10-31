@@ -44,6 +44,12 @@ public class Hospital {
     public String toString(){
         return HospitalName;
     }
+
+    public Hospital(String HospitalName, String PinCode, String City) {
+        this.HospitalName = HospitalName;
+        this.PinCode = PinCode;
+        this.City = City;
+    }
     
     
 }
