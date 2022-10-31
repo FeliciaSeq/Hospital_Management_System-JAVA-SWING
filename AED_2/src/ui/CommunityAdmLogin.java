@@ -36,6 +36,7 @@ public class CommunityAdmLogin extends javax.swing.JFrame {
         UsernameLblC = new javax.swing.JLabel();
         PasswordLblC = new javax.swing.JLabel();
         UsernameTxtC = new javax.swing.JTextField();
+        ClBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,6 +48,8 @@ public class CommunityAdmLogin extends javax.swing.JFrame {
         UsernameLblC.setText("Username :");
 
         PasswordLblC.setText("Password :");
+
+        ClBack.setText("Back");
 
         javax.swing.GroupLayout CommunityAdmLoginPanelLayout = new javax.swing.GroupLayout(CommunityAdmLoginPanel);
         CommunityAdmLoginPanel.setLayout(CommunityAdmLoginPanelLayout);
@@ -63,7 +66,9 @@ public class CommunityAdmLogin extends javax.swing.JFrame {
                     .addComponent(PasswordTxtC, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CommunityAdmLoginPanelLayout.createSequentialGroup()
-                .addContainerGap(308, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
+                .addComponent(ClBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
                 .addGroup(CommunityAdmLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CloginLbl)
                     .addGroup(CommunityAdmLoginPanelLayout.createSequentialGroup()
@@ -74,8 +79,13 @@ public class CommunityAdmLogin extends javax.swing.JFrame {
         CommunityAdmLoginPanelLayout.setVerticalGroup(
             CommunityAdmLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CommunityAdmLoginPanelLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(CloginLbl)
+                .addGroup(CommunityAdmLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CommunityAdmLoginPanelLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(CloginLbl))
+                    .addGroup(CommunityAdmLoginPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(ClBack)))
                 .addGap(94, 94, 94)
                 .addGroup(CommunityAdmLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UsernameTxtC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,6 +153,7 @@ public class CommunityAdmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ClBack;
     private javax.swing.JLabel CloginLbl;
     private javax.swing.JPanel CommunityAdmLoginPanel;
     private javax.swing.JButton LoginBtnC;

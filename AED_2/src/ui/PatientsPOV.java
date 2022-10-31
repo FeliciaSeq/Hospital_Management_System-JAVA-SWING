@@ -4,7 +4,15 @@
  */
 package ui;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import model.Doctor;
+import model.DoctorHistory;
+import model.Hospital;
+import model.HospitalHistory;
+import model.VitalSigns;
+import model.VitalSignsHistory;
 
 /**
  *
@@ -34,7 +42,6 @@ public class PatientsPOV extends javax.swing.JFrame {
         PaBookAptLbl = new javax.swing.JLabel();
         PaAptScroll = new javax.swing.JScrollPane();
         PaAptTbl = new javax.swing.JTable();
-        PaAptComboBox = new javax.swing.JComboBox<>();
         PaBookAptBtn = new javax.swing.JButton();
         PaSearchDocLbl = new javax.swing.JLabel();
         PaSearchDocTxt = new javax.swing.JTextField();
@@ -42,8 +49,14 @@ public class PatientsPOV extends javax.swing.JFrame {
         PaBookAptLbl1 = new javax.swing.JLabel();
         PaVitalSignsScroll = new javax.swing.JScrollPane();
         PaVitalSignsTbl = new javax.swing.JTable();
+        PatBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         PaBookAptPnl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -63,13 +76,6 @@ public class PatientsPOV extends javax.swing.JFrame {
         ));
         PaAptScroll.setViewportView(PaAptTbl);
 
-        PaAptComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        PaAptComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PaAptComboBoxActionPerformed(evt);
-            }
-        });
-
         PaBookAptBtn.setText("Book Appointment");
 
         PaSearchDocLbl.setText("Search Doctor:");
@@ -88,9 +94,7 @@ public class PatientsPOV extends javax.swing.JFrame {
                         .addComponent(PaAptScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PaBookAptPnlLayout.createSequentialGroup()
                         .addGap(98, 98, 98)
-                        .addComponent(PaBookAptBtn)
-                        .addGap(28, 28, 28)
-                        .addComponent(PaAptComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(PaBookAptBtn))
                     .addGroup(PaBookAptPnlLayout.createSequentialGroup()
                         .addGap(133, 133, 133)
                         .addComponent(PaSearchDocLbl)
@@ -110,9 +114,7 @@ public class PatientsPOV extends javax.swing.JFrame {
                     .addComponent(PaSearchDocLbl)
                     .addComponent(PaSearchDocTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(PaBookAptPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PaBookAptBtn)
-                    .addComponent(PaAptComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(PaBookAptBtn)
                 .addGap(60, 60, 60))
         );
 
@@ -136,6 +138,13 @@ public class PatientsPOV extends javax.swing.JFrame {
         ));
         PaVitalSignsScroll.setViewportView(PaVitalSignsTbl);
 
+        PatBack.setText("Back");
+        PatBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PatBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PaVitalSignsPnlLayout = new javax.swing.GroupLayout(PaVitalSignsPnl);
         PaVitalSignsPnl.setLayout(PaVitalSignsPnlLayout);
         PaVitalSignsPnlLayout.setHorizontalGroup(
@@ -148,7 +157,10 @@ public class PatientsPOV extends javax.swing.JFrame {
                         .addGap(185, 185, 185))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PaVitalSignsPnlLayout.createSequentialGroup()
                         .addComponent(PaVitalSignsScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49))))
+                        .addGap(49, 49, 49))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PaVitalSignsPnlLayout.createSequentialGroup()
+                        .addComponent(PatBack)
+                        .addGap(232, 232, 232))))
         );
         PaVitalSignsPnlLayout.setVerticalGroup(
             PaVitalSignsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +169,9 @@ public class PatientsPOV extends javax.swing.JFrame {
                 .addComponent(PaBookAptLbl1)
                 .addGap(18, 18, 18)
                 .addComponent(PaVitalSignsScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(PatBack)
+                .addGap(60, 60, 60))
         );
 
         PatientsPOV.setRightComponent(PaVitalSignsPnl);
@@ -176,9 +190,56 @@ public class PatientsPOV extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PaAptComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaAptComboBoxActionPerformed
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-    }//GEN-LAST:event_PaAptComboBoxActionPerformed
+        DefaultTableModel admin = (DefaultTableModel) PaAptTbl.getModel() ;
+        DoctorHistory newPatientDirectory = new DoctorHistory ();
+        ArrayList<Doctor> listPatients = newPatientDirectory.getDocHistory();
+        for(int i = 0; i < listPatients.size(); i++){
+            String name = listPatients.get(i).getName();
+            
+            
+            admin.addRow(new Object[] { name});
+        }
+        DefaultTableModel admin1 = (DefaultTableModel) PaAptTbl.getModel() ;
+        HospitalHistory newPatientDirectory1 = new HospitalHistory ();
+        ArrayList<Hospital> listPatients1 = newPatientDirectory1.getHospHistory();
+        for(int i = 0; i < listPatients1.size(); i++){
+            String hospitalName = listPatients1.get(i).getHospitalName();
+            String pincode = listPatients1.get(i).getPinCode();
+            String city = listPatients1.get(i).getCity();
+            
+            
+            
+            admin1.addRow(new Object[] { hospitalName,city, pincode });
+            
+        }
+        
+        
+        DefaultTableModel admin2 = (DefaultTableModel) PaVitalSignsTbl.getModel() ;
+        VitalSignsHistory newVitals = new VitalSignsHistory ();
+        ArrayList<VitalSigns> Vital = newVitals.getVitalsHistory();
+        for(int i = 0; i < Vital.size(); i++){
+            String Weight = Vital.get(i).getWeight();
+            String Height = Vital.get(i).getHeight();
+            String Temperature = Vital.get(i).getTemperature();
+            String Pressure = Vital.get(i).getPressure();
+            String Pulse = Vital.get(i).getPulse();
+            
+            admin2.addRow(new Object[] { Weight,Height, Temperature,Pressure,Pulse });
+            
+        }
+        
+        
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    private void PatBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatBackActionPerformed
+        // TODO add your handling code here:
+        MainFrame mf = new MainFrame();
+        mf.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_PatBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,7 +277,6 @@ public class PatientsPOV extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> PaAptComboBox;
     private javax.swing.JScrollPane PaAptScroll;
     private javax.swing.JTable PaAptTbl;
     private javax.swing.JButton PaBookAptBtn;
@@ -228,6 +288,7 @@ public class PatientsPOV extends javax.swing.JFrame {
     private javax.swing.JPanel PaVitalSignsPnl;
     private javax.swing.JScrollPane PaVitalSignsScroll;
     private javax.swing.JTable PaVitalSignsTbl;
+    private javax.swing.JButton PatBack;
     private javax.swing.JSplitPane PatientsPOV;
     // End of variables declaration//GEN-END:variables
 }

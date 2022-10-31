@@ -36,6 +36,7 @@ public class PatientLogin extends javax.swing.JFrame {
         UsernameTxtP = new javax.swing.JTextField();
         PasswordTxtP = new javax.swing.JPasswordField();
         LoginBtnP = new javax.swing.JButton();
+        PlBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,21 +48,18 @@ public class PatientLogin extends javax.swing.JFrame {
         PasswordLblP.setText("Password :");
 
         LoginBtnP.setText("Login");
+        LoginBtnP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginBtnPActionPerformed(evt);
+            }
+        });
+
+        PlBack.setText("Back");
 
         javax.swing.GroupLayout PatientLoginPanelLayout = new javax.swing.GroupLayout(PatientLoginPanel);
         PatientLoginPanel.setLayout(PatientLoginPanelLayout);
         PatientLoginPanelLayout.setHorizontalGroup(
             PatientLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PatientLoginPanelLayout.createSequentialGroup()
-                .addGap(424, 424, 424)
-                .addGroup(PatientLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(UsernameLblP)
-                    .addComponent(PasswordLblP))
-                .addGap(18, 18, 18)
-                .addGroup(PatientLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(UsernameTxtP)
-                    .addComponent(PasswordTxtP, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientLoginPanelLayout.createSequentialGroup()
                 .addContainerGap(364, Short.MAX_VALUE)
                 .addGroup(PatientLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -70,11 +68,28 @@ public class PatientLogin extends javax.swing.JFrame {
                         .addComponent(LoginBtnP, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)))
                 .addGap(339, 339, 339))
+            .addGroup(PatientLoginPanelLayout.createSequentialGroup()
+                .addGroup(PatientLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PatientLoginPanelLayout.createSequentialGroup()
+                        .addGap(424, 424, 424)
+                        .addGroup(PatientLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(UsernameLblP)
+                            .addComponent(PasswordLblP))
+                        .addGap(18, 18, 18)
+                        .addGroup(PatientLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(UsernameTxtP)
+                            .addComponent(PasswordTxtP, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
+                    .addGroup(PatientLoginPanelLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(PlBack)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PatientLoginPanelLayout.setVerticalGroup(
             PatientLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PatientLoginPanelLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(14, 14, 14)
+                .addComponent(PlBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PloginLbl)
                 .addGap(98, 98, 98)
                 .addGroup(PatientLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -102,6 +117,12 @@ public class PatientLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void LoginBtnPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnPActionPerformed
+        // TODO add your handling code here:
+        PatientsPOV admin = new PatientsPOV ();
+        admin.show();
+    }//GEN-LAST:event_LoginBtnPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,6 +164,7 @@ public class PatientLogin extends javax.swing.JFrame {
     private javax.swing.JLabel PasswordLblP;
     private javax.swing.JPasswordField PasswordTxtP;
     private javax.swing.JPanel PatientLoginPanel;
+    private javax.swing.JButton PlBack;
     private javax.swing.JLabel PloginLbl;
     private javax.swing.JLabel UsernameLblP;
     private javax.swing.JTextField UsernameTxtP;

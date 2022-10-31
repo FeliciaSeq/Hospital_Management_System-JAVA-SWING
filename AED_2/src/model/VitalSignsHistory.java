@@ -11,11 +11,11 @@ import java.util.ArrayList;
  * @author felsparkle
  */
 public class VitalSignsHistory {
-    private static ArrayList<VitalSigns> VitalsHistory = new ArrayList<>();
+    public static ArrayList<VitalSigns> VitalsHistory = new ArrayList<>();
     
 //    public VitalSignsHistory() {
 ////        this.VitalsHistory = new ArrayList<VitalSigns>();   
-//    }
+//  }
 
     public static ArrayList<VitalSigns> getVitalsHistory() {
         return VitalsHistory;

@@ -56,6 +56,7 @@ public class DoctorsPOV extends javax.swing.JFrame {
         DocWeightTxt = new javax.swing.JTextField();
         DocWeightLbl = new javax.swing.JLabel();
         DocAddBtn = new javax.swing.JButton();
+        DocBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,13 +65,13 @@ public class DoctorsPOV extends javax.swing.JFrame {
 
         DocPovTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Temperature", "Pressure", "Pulse", "Height", "Weight", "Time of Appointment"
+                "Temperature", "Pressure", "Pulse", "Height", "Weight"
             }
         ));
         DocPovScroll.setViewportView(DocPovTbl);
@@ -130,6 +131,13 @@ public class DoctorsPOV extends javax.swing.JFrame {
             }
         });
 
+        DocBack.setText("Back");
+        DocBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DocBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout DoctorsPovPnlLayout = new javax.swing.GroupLayout(DoctorsPovPnl);
         DoctorsPovPnl.setLayout(DoctorsPovPnlLayout);
         DoctorsPovPnlLayout.setHorizontalGroup(
@@ -167,19 +175,25 @@ public class DoctorsPOV extends javax.swing.JFrame {
                 .addContainerGap(160, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DoctorsPovPnlLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(DoctorsPovPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DoctorsPovPnlLayout.createSequentialGroup()
-                        .addComponent(PatientDeetsLbl)
-                        .addGap(363, 363, 363))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DoctorsPovPnlLayout.createSequentialGroup()
-                        .addComponent(DocAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(474, 474, 474))))
+                .addComponent(DocAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(474, 474, 474))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DoctorsPovPnlLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(DocBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PatientDeetsLbl)
+                .addGap(363, 363, 363))
         );
         DoctorsPovPnlLayout.setVerticalGroup(
             DoctorsPovPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DoctorsPovPnlLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(PatientDeetsLbl)
+                .addGroup(DoctorsPovPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DoctorsPovPnlLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(PatientDeetsLbl))
+                    .addGroup(DoctorsPovPnlLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(DocBack)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(DocPovScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -257,25 +271,26 @@ public class DoctorsPOV extends javax.swing.JFrame {
         String Pulse = DocPulseTxt.getText();
         
         VitalSigns v = new VitalSigns(Weight, Height, Temperature, Pressure, Pulse);
-        VitalSignsHistory.addNewVitalSign(v);
                 
         
         v.setWeight(Weight);
         v.setHeight(Height);
         v.setTemperature(Temperature);
+        
         v.setPressure(Pressure);
         v.setPulse(Pulse);
-        
+        VitalSignsHistory.addNewVitalSign(v);
+       
         populateTable();
         
         
         
         
-        v.setWeight("");
-        v.setHeight("");
-        v.setTemperature("");
-        v.setPressure("");
-        v.setPulse("");
+//        v.setWeight("");
+//        v.setHeight("");
+//        v.setTemperature("");
+//        v.setPressure("");
+//        v.setPulse("");
         }
         catch(Exception e){
             System.out.print(e);
@@ -284,6 +299,13 @@ public class DoctorsPOV extends javax.swing.JFrame {
         
     }//GEN-LAST:event_DocAddBtnActionPerformed
 
+    private void DocBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocBackActionPerformed
+        // TODO add your handling code here:
+        MainFrame mf = new MainFrame();
+        mf.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_DocBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -291,6 +313,7 @@ public class DoctorsPOV extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DocAddBtn;
+    private javax.swing.JButton DocBack;
     private javax.swing.JLabel DocHeightLbl;
     private javax.swing.JTextField DocHeightTxt;
     private javax.swing.JScrollPane DocPovScroll;
@@ -320,11 +343,11 @@ public class DoctorsPOV extends javax.swing.JFrame {
         for(VitalSigns v :  VitalSignsHistory.getVitalsHistory()){
             
             Object [] row = new Object[5];
-            row[0] = v;
-            row[1] = v.getHeight();
-            row[2] = v.getTemperature();
-            row[3] = v.getPressure();
-            row[4] = v.getPulse();
+            row[0] = v.getTemperature();
+            row[1] = v.getPressure();
+            row[2] = v.getPulse();
+            row[3] = v.getHeight();
+            row[4] = v.getWeight();
             
             
             model.addRow(row);

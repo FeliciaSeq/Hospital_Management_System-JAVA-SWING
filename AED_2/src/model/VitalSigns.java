@@ -63,6 +63,9 @@ public class VitalSigns {
         this.Pulse = Pulse;
     }
     
-    
+    @Override
+    public String toString(){
+        return Weight;
+    }
     
 }

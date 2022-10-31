@@ -129,6 +129,7 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
         SaHspDeleteBtn = new javax.swing.JButton();
         HospitalPinCombo = new javax.swing.JComboBox<>();
         HospitalCityCombo = new javax.swing.JComboBox<>();
+        REdirectToMain = new javax.swing.JButton();
         SaDocPnl = new javax.swing.JPanel();
         SaDocLbl = new javax.swing.JLabel();
         SaDocNameLbl1 = new javax.swing.JLabel();
@@ -218,6 +219,13 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
             }
         });
 
+        REdirectToMain.setText("Back");
+        REdirectToMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                REdirectToMainActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SaHspPnlLayout = new javax.swing.GroupLayout(SaHspPnl);
         SaHspPnl.setLayout(SaHspPnlLayout);
         SaHspPnlLayout.setHorizontalGroup(
@@ -225,7 +233,9 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
             .addGroup(SaHspPnlLayout.createSequentialGroup()
                 .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SaHspPnlLayout.createSequentialGroup()
-                        .addGap(183, 183, 183)
+                        .addGap(17, 17, 17)
+                        .addComponent(REdirectToMain)
+                        .addGap(88, 88, 88)
                         .addComponent(SaHspLbl))
                     .addGroup(SaHspPnlLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -267,8 +277,10 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
             SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SaHspPnlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(SaHspLbl)
-                .addGap(19, 19, 19)
+                .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SaHspLbl)
+                    .addComponent(REdirectToMain))
+                .addGap(18, 18, 18)
                 .addGroup(SaHspPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SaHspNameLbl1)
                     .addComponent(SaHspNameTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -684,6 +696,14 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
         
     }//GEN-LAST:event_SaDocDeleteBtnActionPerformed
 
+    private void REdirectToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REdirectToMainActionPerformed
+        // TODO add your handling code here:
+        
+        MainFrame mf = new MainFrame();
+        mf.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_REdirectToMainActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -696,6 +716,7 @@ public class SystemAdmPOVhospital extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> HospNameCombo;
     private javax.swing.JComboBox<String> HospitalCityCombo;
     private javax.swing.JComboBox<String> HospitalPinCombo;
+    private javax.swing.JButton REdirectToMain;
     private javax.swing.JButton SaDocAddBtn;
     private javax.swing.JLabel SaDocCityLbl1;
     private javax.swing.JLabel SaDocCityLbl2;

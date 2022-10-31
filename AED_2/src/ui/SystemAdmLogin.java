@@ -36,6 +36,7 @@ public class SystemAdmLogin extends javax.swing.JFrame {
         UsernameLblS = new javax.swing.JLabel();
         PasswordLblS = new javax.swing.JLabel();
         UsernameTxtS = new javax.swing.JTextField();
+        SlBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,7 +76,7 @@ public class SystemAdmLogin extends javax.swing.JFrame {
                     .addGroup(SystemAdminLoginPanelLayout.createSequentialGroup()
                         .addGap(207, 207, 207)
                         .addComponent(SloginLbl)))
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         SystemAdminLoginPanelLayout.setVerticalGroup(
             SystemAdminLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,12 +96,16 @@ public class SystemAdmLogin extends javax.swing.JFrame {
                 .addContainerGap(152, Short.MAX_VALUE))
         );
 
+        SlBack.setText("Back");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(87, 87, 87)
+                .addGap(38, 38, 38)
+                .addComponent(SlBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SystemAdminLoginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(48, 48, 48))
         );
@@ -110,6 +115,10 @@ public class SystemAdmLogin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(SystemAdminLoginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(SlBack)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,6 +169,7 @@ public class SystemAdmLogin extends javax.swing.JFrame {
     private javax.swing.JButton LoginBtnS;
     private javax.swing.JLabel PasswordLblS;
     private javax.swing.JPasswordField PasswordTxtS;
+    private javax.swing.JButton SlBack;
     private javax.swing.JLabel SloginLbl;
     private javax.swing.JPanel SystemAdminLoginPanel;
     private javax.swing.JLabel UsernameLblS;

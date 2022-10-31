@@ -174,6 +174,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void PatientLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientLoginBtnActionPerformed
         // TODO add your handling code here:
+        PatientLogin admin = new PatientLogin ();
+        admin.show();
     }//GEN-LAST:event_PatientLoginBtnActionPerformed
 
     private void DoctorLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorLoginBtnActionPerformed

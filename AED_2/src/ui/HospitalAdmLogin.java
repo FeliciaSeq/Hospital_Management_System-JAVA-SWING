@@ -67,6 +67,7 @@ public class HospitalAdmLogin extends javax.swing.JFrame {
         UsernameTxtH = new javax.swing.JTextField();
         PasswordTxtH = new javax.swing.JPasswordField();
         LoginBtnH = new javax.swing.JButton();
+        HlBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,20 +85,12 @@ public class HospitalAdmLogin extends javax.swing.JFrame {
             }
         });
 
+        HlBack.setText("Back");
+
         javax.swing.GroupLayout HospitalLoginAdmPanelLayout = new javax.swing.GroupLayout(HospitalLoginAdmPanel);
         HospitalLoginAdmPanel.setLayout(HospitalLoginAdmPanelLayout);
         HospitalLoginAdmPanelLayout.setHorizontalGroup(
             HospitalLoginAdmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HospitalLoginAdmPanelLayout.createSequentialGroup()
-                .addGap(424, 424, 424)
-                .addGroup(HospitalLoginAdmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(UsernameLblH)
-                    .addComponent(PasswordLblH))
-                .addGap(18, 18, 18)
-                .addGroup(HospitalLoginAdmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(UsernameTxtH)
-                    .addComponent(PasswordTxtH, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HospitalLoginAdmPanelLayout.createSequentialGroup()
                 .addContainerGap(308, Short.MAX_VALUE)
                 .addGroup(HospitalLoginAdmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,11 +99,28 @@ public class HospitalAdmLogin extends javax.swing.JFrame {
                         .addGap(177, 177, 177)
                         .addComponent(LoginBtnH, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(393, 393, 393))
+            .addGroup(HospitalLoginAdmPanelLayout.createSequentialGroup()
+                .addGroup(HospitalLoginAdmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(HospitalLoginAdmPanelLayout.createSequentialGroup()
+                        .addGap(424, 424, 424)
+                        .addGroup(HospitalLoginAdmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(UsernameLblH)
+                            .addComponent(PasswordLblH))
+                        .addGap(18, 18, 18)
+                        .addGroup(HospitalLoginAdmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(UsernameTxtH)
+                            .addComponent(PasswordTxtH, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
+                    .addGroup(HospitalLoginAdmPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(HlBack)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         HospitalLoginAdmPanelLayout.setVerticalGroup(
             HospitalLoginAdmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HospitalLoginAdmPanelLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(24, 24, 24)
+                .addComponent(HlBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(HloginLbl)
                 .addGap(94, 94, 94)
                 .addGroup(HospitalLoginAdmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -186,6 +196,7 @@ public class HospitalAdmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton HlBack;
     private javax.swing.JLabel HloginLbl;
     private javax.swing.JPanel HospitalLoginAdmPanel;
     private javax.swing.JButton LoginBtnH;
